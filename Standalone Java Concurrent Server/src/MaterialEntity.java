@@ -1,18 +1,21 @@
-import lombok.Getter;
-
-@Getter
-public class MaterialEntity
+/// Represents a material entity in the game that can be picked up by a player
+///
+/// @param materialId   ID specific to the game it's instantiated in
+/// @param materialType type of material
+/// @param position     position of the material in the game
+/// @param radius       radius of the material's hit box (furthest distance from the center)
+public record MaterialEntity(int materialId, MaterialEnum materialType, double[] position,
+                             double radius)
 {
-    private final int materialId;  // This is the id specific to the game it's instantiated in
-    private final MaterialEnum materialType;  // This is the type of material
-    private final double[] position;  // This is the position of the material (double instead of float for precision)
-    private final int radius;  // This is the radius of the material's hit box (furthest distance from the center)
 
-    public MaterialEntity(int materialId, MaterialEnum materialType, double[] position)
+    public String toString()
     {
-        this.materialId = materialId;
-        this.materialType = materialType;
-        this.position = position;
-        this.radius = 1;  // The radius is set to 1 by default
+        StringBuilder MaterialEntityString = new StringBuilder();
+        MaterialEntityString.append("{");
+        MaterialEntityString.append("\"id\":").append(materialId).append(",");
+        MaterialEntityString.append("\"type\":\"").append(materialType).append("\",");
+        MaterialEntityString.append("\"position\":[").append(position[0]).append(",").append(position[1]).append("]");
+        MaterialEntityString.append("}");
+        return MaterialEntityString.toString();
     }
 }
