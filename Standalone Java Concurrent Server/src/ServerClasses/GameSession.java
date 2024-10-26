@@ -90,10 +90,9 @@ public class GameSession
             }
         }
         RequiresStateBroadcastSemaphore.acquireUninterruptibly();
-        synchronized (ActiveUpdatingThreadsLock)
-        {
-            activeUpdatingThreads++;
-        }
+        // The semaphore was released in the broadcastGameState method, which means all the other
+        // threads related to this game session will wait until the semaphore is released
+        activeUpdatingThreads++;
         RequiresStateBroadcastSemaphore.release();
     }
 
@@ -115,6 +114,11 @@ public class GameSession
     {
         synchronized (EnterReadyExitLock)
         {
+            if (players.isEmpty())
+            {
+                return false;
+            }
+
             if (gameStatus == 0)
             {
                 players.put(player.getUserId(), player);
@@ -127,13 +131,13 @@ public class GameSession
 
     /// Removes a player from the game session.
     ///
-    /// @param player The player to be removed from the game session.
-    public void removePlayer(Player player)
+    /// @param playerId The player to be removed from the game session.
+    public void removePlayer(int playerId)
     {
         synchronized (EnterReadyExitLock)
         {
-            Player removedPlayer = players.remove(player.getUserId());
-            playerReady.remove(player.getUserId());
+            Player removedPlayer = players.remove(playerId);
+            playerReady.remove(playerId);
             if (removedPlayer == null)
             {
                 return;
@@ -146,7 +150,7 @@ public class GameSession
 
             if (players.isEmpty())
             {
-                Server.getInstance().removeGame(this.gameId);
+                Server.getInstance().removeGame(gameId);
                 gameSessionBroadcastThread.interrupt();
                 if (gameSessionSpawnerThread != null)
                 {
@@ -159,13 +163,18 @@ public class GameSession
     /// Changes the ready status of a player.
     /// If all players are ready, the game will start.
     ///
-    /// @param player The player whose ready status will be changed.
-    /// @param ready The new ready status of the player.
-    public void changePlayerReadyStatus(Player player, boolean ready)
+    /// @param playerId The player whose ready status will be changed.
+    /// @param ready    The new ready status of the player.
+    public void changePlayerReadyStatus(int playerId, boolean ready)
     {
         synchronized (EnterReadyExitLock)
         {
-            playerReady.put(player.getUserId(), ready);
+            if (!playerReady.containsKey(playerId))
+            {
+                return;
+            }
+
+            playerReady.put(playerId, ready);
             if (ready)
             {
                 tryStartGame();
@@ -213,29 +222,27 @@ public class GameSession
     /// @return True if the game is in progress and an attempt to spawn a material was made, false otherwise.
     public boolean checkStatusAndTrySpawnMaterial()
     {
-        synchronized (materials)
+        if (gameStatus != 1)
         {
-            if (gameStatus != 1)
-            {
-                return false;
-            }
+            return false;
+        }
 
-            if (materials.size() >= 2)
-            {
-                return true;
-            }
-
-            // The client will handle overlapping materials
-            double[] position = new double[2];
-            position[0] = -10.0 + Math.random() * 20.0;
-            position[1] = -10.0 + Math.random() * 20.0;
-            MaterialEntity material = new MaterialEntity(latestMaterialId, MaterialEnum.values()[(int) (Math.random() * 3)], position, 1.0);
-
-            materials.put(latestMaterialId, material);
-            latestMaterialId++;
-
+        if (materials.size() >= 10)
+        {
             return true;
         }
+
+        // The client will handle overlapping materials
+        double[] position = new double[2];
+        position[0] = -10.0 + Math.random() * 20.0;
+        position[1] = -10.0 + Math.random() * 20.0;
+        MaterialEntity material = new MaterialEntity(latestMaterialId, MaterialEnum.values()[(int) (Math.random() * 3)], position, 1.0);
+
+        materials.put(latestMaterialId, material);
+        latestMaterialId++;
+
+        return true;
+
     }
 
     /// Removes a material from the game session.
@@ -243,59 +250,50 @@ public class GameSession
     /// @param materialId The ID of the material to be removed.
     public MaterialEntity removeMaterial(int materialId)
     {
-        synchronized (materials)
-        {
-            return materials.remove(materialId);
-        }
+        return materials.remove(materialId);
     }
 
     /// Tries to add a material to a structure. If the structure is complete, the game will end.
     ///
     /// @param materialType The type of the material to be added.
-    /// @param structureId The ID of the structure to which the material will be added.
+    /// @param structureId  The ID of the structure to which the material will be added.
     /// @return True if the material was added successfully, false otherwise.
     public boolean tryAddMaterialToStructure(MaterialEnum materialType, int structureId)
     {
-        synchronized (structures)
+        Structure structure = structures.get(structureId);
+        if (structure == null)
         {
-            Structure structure = structures.get(structureId);
-            if (structure == null)
-            {
-                return false;
-            }
-
-            if (!structure.tryAddProgressAndThenLockProgress(materialType))
-            {
-                return false;
-            }
-
-            if (gameStatus == 1 && structure.isCompleteAndUnlockProgress())
-            {
-                winner = players.get(structureId);
-                gameStatus = 2;
-            }
-
-            return true;
+            return false;
         }
+
+        if (!structure.tryAddProgress(materialType))
+        {
+            return false;
+        }
+
+        if (gameStatus == 1 && structure.isComplete())
+        {
+            winner = players.get(structureId);
+            gameStatus = 2;
+        }
+
+        return true;
     }
 
     /// Tries to remove a material from a structure.
     ///
     /// @param materialType The type of the material to be removed.
-    /// @param structureId The ID of the structure from which the material will be removed.
+    /// @param structureId  The ID of the structure from which the material will be removed.
     /// @return True if the material was removed successfully, false otherwise.
     public boolean tryRemoveMaterialFromStructure(MaterialEnum materialType, int structureId)
     {
-        synchronized (structures)
+        Structure structure = structures.get(structureId);
+        if (structure == null)
         {
-            Structure structure = structures.get(structureId);
-            if (structure == null)
-            {
-                return false;
-            }
-
-            return structure.tryRemoveProgress(materialType);
+            return false;
         }
+
+        return structure.tryRemoveProgress(materialType);
     }
 
     /**
@@ -317,7 +315,6 @@ public class GameSession
         String state = this.toString();
         for (Player player : players.values())
         {
-            System.out.println("Thread " + player.getUserId() + ": Sending game state");
             player.sendGameState(state);
         }
         RequiresStateBroadcastSemaphore.release();
@@ -326,6 +323,7 @@ public class GameSession
 
     /**
      * This method is used to get all the important information about the game session in a JSON format.
+     *
      * @return The game session as a JSON string.
      */
     @Override

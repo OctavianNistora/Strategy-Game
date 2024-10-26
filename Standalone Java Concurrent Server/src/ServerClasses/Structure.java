@@ -4,7 +4,6 @@ import RecordsEnums.MaterialEnum;
 
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.concurrent.Semaphore;
 
 /// Represents a structure that can be built by a player in the game.
 ///
@@ -23,8 +22,6 @@ public class Structure
 
     // This is the lock for the structure's progress
     private final Object progressLock = new Object();
-    // This is the semaphore for checking if the structure is complete when adding progress
-    private final Semaphore addProgressCheckCompleteSemaphore = new Semaphore(1);
 
     public Structure(int playerId)
     {
@@ -41,15 +38,12 @@ public class Structure
         }
     }
 
-    /// Tries to add a material to the structure's current stage and if it succeeds, it locks
-    /// the progress in order to check if the structure is complete without any other thread interfering.
-    ///
-    /// {@code isCompleteAndUnlockProgress()} NEEDS to be called sometime after this method if it succeeds,
-    /// in the same thread it was called, to avoid permanently locking this object's method.
+    /// Tries to add a material to the structure's current stage and if it succeeds,
+    /// it advances the stage if all materials have the required progress.
     ///
     /// @param material the material type attempted to be added to the structure
     /// @return <code>true</code> if the progress was added, <code>false</code> otherwise
-    public boolean tryAddProgressAndThenLockProgress(MaterialEnum material)
+    public boolean tryAddProgress(MaterialEnum material)
     {
         synchronized (progressLock)
         {
@@ -58,12 +52,12 @@ public class Structure
             {
                 return false;  // The structure cannot have more progress to this material than the current stage allows
             }
+
             progress.put(material, currentMaterialProgress + 1);
             if (currentMaterialProgress + 1 == stage * 2 + 1)
             {
                 tryAdvanceStage();
             }
-            addProgressCheckCompleteSemaphore.acquireUninterruptibly();
             return true;
         }
     }
@@ -71,40 +65,28 @@ public class Structure
     /// Tries to advance the structure to the next stage if all materials have the required progress
     private void tryAdvanceStage()
     {
-        synchronized (progressLock)
+        Collection<Integer> progressValues = progress.values();
+        for (Integer materialProgress : progressValues)
         {
-            boolean canAdvanceStage = true;
-            Collection<Integer> progressValues = progress.values();
-            for (Integer materialProgress : progressValues)
+            if (materialProgress < stage * 2 + 1)
             {
-                if (materialProgress < stage * 2 + 1)
-                {
-                    canAdvanceStage = false;
-                    break;
-                }
-            }
-            if (!canAdvanceStage)
-            {
-                // The structure cannot advance to the next stage if any
-                // material has less progress than the current stage allows
                 return;
             }
-
-            stage++;
-            // The structure resets the progress of each material when advancing to the next stage
-            progress.forEach((material, _) -> progress.put(material, 0));
         }
+
+        stage++;
+        // The structure resets the progress of each material when advancing to the next stage
+        progress.forEach((material, _) -> progress.put(material, 0));
     }
 
-    /// Returns whether the structure is complete and unlocks the progress for other threads to continue.
+    /// Returns whether the structure is complete.
     ///
     /// @return <code>true</code> if the structure is complete, <code>false</code> otherwise
-    public boolean isCompleteAndUnlockProgress()
+    public boolean isComplete()
     {
         synchronized (progressLock)
         {
-            addProgressCheckCompleteSemaphore.release();
-            return stage == 3;  // The structure is complete when it reaches stage 3
+            return stage >= 3;  // The structure is complete when it reaches stage 3
         }
     }
 

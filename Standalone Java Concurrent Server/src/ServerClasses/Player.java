@@ -140,7 +140,7 @@ public class Player
 
             gameSession.checkRequiresStateBroadcast();
 
-            gameSession.removePlayer(this);
+            gameSession.removePlayer(userId);
 
             gameSession.decrementActiveUpdatingThreads();
 
@@ -179,7 +179,7 @@ public class Player
 
         gameSession.checkRequiresStateBroadcast();
 
-        gameSession.changePlayerReadyStatus(this, isReady);
+        gameSession.changePlayerReadyStatus(userId, isReady);
 
         gameSession.decrementActiveUpdatingThreads();
         return true;
@@ -220,29 +220,36 @@ public class Player
     /// @return <code>true</code> if the player successfully moved, or <code>false</code> if the player is not in a game
     public boolean move(double x, double y)
     {
+        GameSession gameSession;
+        // gameLock is used instead of positionLock to get the gameSession and avoid
+        // changing the player's position while the game is broadcasting its state
+        synchronized (gameLock)
+        {
+            gameSession = this.gameSession;
+        }
+
+        if (gameSession == null)
+        {
+            // The player is not in a game so they cannot move
+            return false;
+        }
+
+        gameSession.checkRequiresStateBroadcast();
+
         synchronized (positionLock)
         {
-            GameSession gameSession;
-            // gameLock is used instead of positionLock to get the gameSession and avoid
-            // changing the player's position while the game is broadcasting its state
-            synchronized (gameLock)
+            if (position == null)
             {
-                gameSession = this.gameSession;
-            }
-
-            if (gameSession == null)
-            {
-                // The player is not in a game so they cannot move
+                // The player's position is not set until the game starts
+                gameSession.decrementActiveUpdatingThreads();
                 return false;
             }
 
-            gameSession.checkRequiresStateBroadcast();
-
             position[0] = x;
             position[1] = y;
-
-            gameSession.decrementActiveUpdatingThreads();
         }
+
+        gameSession.decrementActiveUpdatingThreads();
         return true;
     }
 
@@ -349,7 +356,7 @@ public class Player
     /// player is currently in and remove it from their inventory.
     ///
     /// @param materialType the type of material to add
-    /// @param structureId the ID of the structure to add the material to
+    /// @param structureId  the ID of the structure to add the material to
     /// @return <code>true</code> if the player successfully added the material to the
     /// structure, or <code>false</code> if the player is not in a game, the player
     /// does not have the material, or the structure's material progress is already full
@@ -391,8 +398,7 @@ public class Player
                         materialCount--;
                         gameSession.decrementActiveUpdatingThreads();
                         return true;
-                    }
-                    else
+                    } else
                     {
                         gameSession.decrementActiveUpdatingThreads();
                         return false;
@@ -409,7 +415,7 @@ public class Player
     /// the player is currently in and add it to their inventory.
     ///
     /// @param materialType the type of material to steal
-    /// @param structureId the ID of the structure to steal the material from
+    /// @param structureId  the ID of the structure to steal the material from
     /// @return <code>true</code> if the player successfully stole the material from the structure
     /// and added it to their inventory, or <code>false</code> if the player is not in a game, the
     /// player's inventory is full, or the structure's material progress is already empty
