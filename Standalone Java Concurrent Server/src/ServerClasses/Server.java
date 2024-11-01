@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.Collection;
 import java.util.Hashtable;
 
+/// The server class that keeps track of all the available games and establishes a connection between a player and a game session.
 public class Server
 {
     private static Server instance = null;

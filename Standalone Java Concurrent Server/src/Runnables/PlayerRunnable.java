@@ -17,6 +17,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
+/// This class is responsible for handling the commands sent by the client in the form of JSON strings.
 public class PlayerRunnable implements Runnable
 {
     private final int id;

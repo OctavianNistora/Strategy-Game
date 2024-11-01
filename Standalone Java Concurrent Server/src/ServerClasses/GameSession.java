@@ -8,7 +8,9 @@ import Runnables.GameSessionSpawnerRunnable;
 import java.util.Hashtable;
 import java.util.concurrent.Semaphore;
 
-
+/// This class represents a game session. A game session is a game that is being
+/// played by multiple players. The methods in this class are used to manage the
+/// game session's state and broadcast the game state to all the players in the game session.
 public class GameSession
 {
     private final int gameId;
@@ -143,11 +145,6 @@ public class GameSession
                 return;
             }
 
-            if (gameStatus == 1)
-            {
-                //TODO: Once the DB is implemented, increment the player's losses
-            }
-
             if (players.isEmpty())
             {
                 Server.getInstance().removeGame(gameId);
@@ -204,6 +201,9 @@ public class GameSession
         }
         gameStatus = 1;
         Server.getInstance().removeGame(this.gameId);
+
+        //TODO: Once the DB is implemented, insert a new record for each
+        // player-session pair in the mapping (many-to-many) table
 
         Thread gameSessionSpawnerThread = new Thread(new GameSessionSpawnerRunnable(this));
         gameSessionSpawnerThread.start();
@@ -275,6 +275,8 @@ public class GameSession
         {
             winner = players.get(structureId);
             gameStatus = 2;
+
+            //TODO: Once the DB is implemented, update the record by adding the winner
         }
 
         return true;

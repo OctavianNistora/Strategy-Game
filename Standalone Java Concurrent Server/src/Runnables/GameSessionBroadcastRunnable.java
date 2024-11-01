@@ -2,6 +2,7 @@ package Runnables;
 
 import ServerClasses.GameSession;
 
+/// Runnable class that broadcasts the game state (snapshot) to all players in the game session at a fixed rate until the game ends
 public class GameSessionBroadcastRunnable implements Runnable
 {
     private final GameSession game;
