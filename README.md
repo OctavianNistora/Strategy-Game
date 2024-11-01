@@ -27,3 +27,5 @@ Solution: A monitor is used to allow only one player to modify the progress of t
 High<br/>
 1. The game broadcast thread has waited ~30ms and needs to send the state of the current game to all participating players while they are also sending commands<br/>
 Solution: The method that broadcasts the state acquires the RequiresStateBroadcastSemaphore semaphore, waits until it can requiresStateBroadcast boolean and then constantly checks if the number of still-active threads has reached 0, then sends the state to all players that are still in the game/match and afterwards releases the RequiresStateBroadcastSemaphore semaphore. All method calls that influence the state of the game have to first check if the requiresStateBroadcast boolean is true. If it's true, the thread waits until the RequiresStateBroadcastSemaphore semaphore can be acquired and immediately releases it. Afterwards it waits to increment the active threads counter, continues it's execution and after it's done it waits to decrement the counter
+
+![CEBP diagram](https://github.com/user-attachments/assets/91a86b1e-d43d-4e26-9d56-3493131423fb)
