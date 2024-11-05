@@ -148,7 +148,7 @@ public class GameSession
 
             if (players.isEmpty())
             {
-                Server.getInstance().removeGame(gameId);
+                SingletonServer.getServer().removeGame(gameId);
                 gameSessionBroadcastThread.interrupt();
                 if (gameSessionSpawnerThread != null)
                 {
@@ -201,7 +201,7 @@ public class GameSession
             }
         }
         gameStatus = 1;
-        Server.getInstance().removeGame(this.gameId);
+        SingletonServer.getServer().removeGame(this.gameId);
 
         //TODO: Once the DB is implemented, insert a new record for each
         // player-session pair in the mapping (many-to-many) table

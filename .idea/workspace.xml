@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="Added additional gitignore in subproject">
-      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/Main.java" afterDir="false" />
+    <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="More file/folder organization">
+      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/SingletonServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClientWebSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/ServerClasses/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/ServerClasses/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/GameSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/GameSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.form" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +54,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 6
 }]]></component>
@@ -60,7 +71,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.LocalClient.executor": "Run",
+    "Application.Main.executor": "Run",
     "Application.Server.executor": "Run",
+    "Maven.concurrent-server [clean].executor": "Run",
+    "Maven.concurrent-server [compile].executor": "Run",
+    "Maven.concurrent-server [validate].executor": "Run",
+    "Maven.server-concurrent [clean].executor": "Run",
+    "Maven.server-concurrent [compile].executor": "Run",
+    "Maven.server-concurrent [validate].executor": "Run",
     "Maven.strategy-game-java-concurrent-server [clean].executor": "Run",
     "Maven.strategy-game-java-concurrent-server [compile].executor": "Run",
     "Maven.strategy-game-java-concurrent-server [validate].executor": "Run",
@@ -79,13 +97,13 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.LocalClient">
     <configuration name="LocalClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Testing.LocalClient" />
+      <option name="MAIN_CLASS_NAME" value="com.aiabon.server.concurrent.Testing.LocalClient" />
       <module name="Standalone Java Concurrent Server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Testing.*" />
+          <option name="PATTERN" value="com.aiabon.server.concurrent.Testing.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -93,9 +111,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.aiabon.server.concurrent.Main" />
+      <module name="Standalone Java Concurrent Server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.aiabon.server.concurrent.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.LocalClient" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.LocalClient" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -115,7 +151,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1730832967350</updated>
-      <workItem from="1730832968051" duration="1641000" />
+      <workItem from="1730832968051" duration="7848000" />
     </task>
     <task id="LOCAL-00001" summary="Added Maven support to concurrent server subproject">
       <option name="closed" value="true" />
@@ -133,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730833822343</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="More file/folder organization">
+      <option name="closed" value="true" />
+      <created>1730834718799</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730834718799</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +186,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Maven support to concurrent server subproject" />
     <MESSAGE value="Added additional gitignore in subproject" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added additional gitignore in subproject" />
+    <MESSAGE value="More file/folder organization" />
+    <option name="LAST_COMMIT_MESSAGE" value="More file/folder organization" />
   </component>
 </project>

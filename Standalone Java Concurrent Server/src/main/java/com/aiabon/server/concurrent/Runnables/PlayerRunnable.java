@@ -10,50 +10,36 @@ import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
 import com.aiabon.server.concurrent.ServerClasses.Player;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import org.java_websocket.WebSocket;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.Socket;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /// This class is responsible for handling the commands sent by the client in the form of JSON strings.
 public class PlayerRunnable implements Runnable
 {
     private final int id;
-    private final Socket socket;
-    private DataInputStream in;
-    private DataOutputStream out;
+    private final LinkedBlockingQueue<String> input;
+    private final WebSocket output;
     private Player player;
 
-    public PlayerRunnable(int id, Socket socket)
+    public PlayerRunnable(int id, LinkedBlockingQueue<String> input, WebSocket output)
     {
         this.id = id;
-        this.socket = socket;
-        this.in = null;
-        this.out = null;
+        this.input = input;
+        this.output = output;
         this.player = null;
     }
 
     @Override
     public void run()
     {
-        try
-        {
-            in = new DataInputStream(socket.getInputStream());
-            out = new DataOutputStream(socket.getOutputStream());
-        } catch (Exception e)
-        {
-            System.out.println("Thread " + id + " I/O error: " + e);
-            return;
-        }
 
         Gson gson = new Gson();
         while (true)
         {
             try
             {
-                String playerName = in.readUTF();
+                String playerName = input.take();
                 try
                 {
                     PlayerCommandDTO playerCommandDTO = gson.fromJson(playerName, PlayerCommandDTO.class);
@@ -61,24 +47,16 @@ public class PlayerRunnable implements Runnable
                     {
                         PlayerDataLoginDTO playerDataLoginDTO = gson.fromJson(playerCommandDTO.data(), PlayerDataLoginDTO.class);
                         player = new Player(this, playerDataLoginDTO.id(), playerDataLoginDTO.name());
-                        out.writeUTF("Successfully logged in player");
+                        output.send("Successfully logged in player");
                         break;
                     } else
                     {
-                        out.writeUTF("Invalid player data format");
+                        output.send("Invalid player data format");
                     }
                 } catch (JsonSyntaxException e)
                 {
-                    out.writeUTF("Invalid player data format");
+                    output.send("Invalid player data format");
                 }
-            } catch (EOFException e)
-            {
-                System.out.println("Thread " + id + ": Client disconnected");
-                return;
-            } catch (IOException e)
-            {
-                System.out.println("Thread " + id + " I/O error: " + e);
-                return;
             } catch (Exception e)
             {
                 System.out.println("Thread " + id + " error: " + e);
@@ -90,22 +68,28 @@ public class PlayerRunnable implements Runnable
         {
             try
             {
-                String command = in.readUTF();
+                String command = input.take();
+                if (command.equals("stop"))
+                {
+                    player.leaveGame();
+                    return;
+                }
+
                 PlayerCommandDTO playerCommandDTO = gson.fromJson(command, PlayerCommandDTO.class);
                 switch (playerCommandDTO.command())
                 {
                     case "listleaderboard":
                         LeaderboardRow[] leaderboard = player.getLeaderboard();
-                        out.writeUTF(gson.toJson(leaderboard));
+                        output.send(gson.toJson(leaderboard));
                         break;
                     case "listgames":
                         GamesListRow[] gamesList = player.getAvailableGamesList();
                         if (gamesList == null)
                         {
-                            out.writeUTF("No games available");
+                            output.send("No games available");
                             break;
                         }
-                        out.writeUTF(gson.toJson(gamesList));
+                        output.send(gson.toJson(gamesList));
                         break;
                     case "startgame":
                         boolean success = player.createAndJoinGame(playerCommandDTO.data());
@@ -194,19 +178,9 @@ public class PlayerRunnable implements Runnable
                         }
                         break;
                     default:
-                        out.writeUTF("Invalid command");
+                        output.send("Invalid command");
                         break;
                 }
-            } catch (EOFException e)
-            {
-                System.out.println("Thread " + id + ": Client disconnected");
-                player.leaveGame();
-                return;
-            } catch (IOException e)
-            {
-                System.out.println("Thread " + id + " I/O error: " + e);
-                player.leaveGame();
-                return;
             } catch (Exception e)
             {
                 System.out.println("Thread " + id + " error: " + e);
@@ -220,11 +194,11 @@ public class PlayerRunnable implements Runnable
     {
         try
         {
-            System.out.println("Thread " + id + ": Sending game state");
-            out.writeUTF(gameState);
-        } catch (IOException e)
+            System.out.println(System.currentTimeMillis() + " Thread " + id + ": Sending game state");
+            output.send(gameState);
+        } catch (Exception e)
         {
-            System.out.println("Thread " + id + " I/O error: " + e);
+            System.out.println("Thread " + id + " error: " + e);
         }
     }
 }

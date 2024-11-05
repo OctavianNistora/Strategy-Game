@@ -1,27 +1,67 @@
 package com.aiabon.server.concurrent.ServerClasses;
 
 import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
+import com.aiabon.server.concurrent.Runnables.PlayerRunnable;
+import org.java_websocket.WebSocket;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
 
+import java.net.InetSocketAddress;
 import java.util.Collection;
 import java.util.Hashtable;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /// The server class that keeps track of all the available games and establishes a connection between a player and a game session.
-public class Server
+public class Server extends WebSocketServer
 {
-    private static Server instance = null;
-
     private final Hashtable<Integer, GameSession> availableGames = new Hashtable<>();
+    private int threadCount = 1;
     private int nextGameId = 1;
 
-    /// Get the singleton instance of the server.
-    public static Server getInstance()
+    public Server(int port)
     {
-        if (instance == null)
-        {
-            instance = new Server();
-        }
-        return instance;
+        super(new InetSocketAddress(port));
     }
+
+    @Override
+    public void onOpen(WebSocket conn, ClientHandshake handshake)
+    {
+        LinkedBlockingQueue<String> playerQueue = new LinkedBlockingQueue<>();
+        conn.setAttachment(playerQueue);
+
+        PlayerRunnable playerRunnable = new PlayerRunnable(threadCount, playerQueue, conn);
+        Thread playerThread = new Thread(playerRunnable);
+        playerThread.start();
+
+        threadCount++;
+    }
+
+    @Override
+    public void onClose(WebSocket conn, int code, String reason, boolean remote)
+    {
+        LinkedBlockingQueue<String> playerQueue = conn.getAttachment();
+        playerQueue.add("stop");
+    }
+
+    @Override
+    public void onMessage(WebSocket conn, String message)
+    {
+        LinkedBlockingQueue<String> playerQueue = conn.getAttachment();
+        playerQueue.add(message);
+    }
+
+    @Override
+    public void onError(WebSocket conn, Exception ex)
+    {
+
+    }
+
+    @Override
+    public void onStart()
+    {
+
+    }
+
 
     /// Returns an array of games that are available to join.
     ///

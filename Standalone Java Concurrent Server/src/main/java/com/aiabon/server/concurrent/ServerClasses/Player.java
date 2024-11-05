@@ -12,7 +12,7 @@ public class Player
 {
     // com.aiabon.server.concurrent.ServerClasses.Server instance
     // Slightly faster than calling com.aiabon.server.concurrent.ServerClasses.Server.getInstance() every time
-    private static final Server server = Server.getInstance();
+    private static final Server server = SingletonServer.getServer();
     private final PlayerRunnable runnable;
     // com.aiabon.server.concurrent.ServerClasses.Player's unique identifier
     private final int userId;

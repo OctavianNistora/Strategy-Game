@@ -8,66 +8,38 @@ import com.google.gson.*;
 
 import javax.swing.*;
 import java.awt.event.WindowEvent;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class LocalClient
 {
-    private JPanel mainPanel;
+    private JPanel MainPanel;
     private JTextArea textArea;
     private JTextField textField;
     private JScrollPane scrollPane;
-    private DataInputStream in;
-    private DataOutputStream out;
+    private static LocalClientWebSocket client;
     private Gson gson;
 
     public static void main(String[] args)
     {
         JFrame frame = new JFrame("Local Client");
         LocalClient ui = new LocalClient();
-        frame.setContentPane(ui.mainPanel);
+        frame.setContentPane(ui.MainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setVisible(true);
 
-        Socket socket;
-        while (true)
-        {
-            try
-            {
-                //noinspection resource
-                socket = new Socket("localhost", 7676);
-                break;
-            } catch (Exception e)
-            {
-                ui.textArea.append("Connection error: could not connect to server\nReattempting in 1 second\n");
-            }
-            try
-            {
-                //noinspection BusyWait
-                Thread.sleep(1000);
-            } catch (InterruptedException e)
-            {
-                System.out.println("Thread error: " + e);
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                return;
-            }
-        }
-        ui.textArea.setText("Connected to server\n");
-
         try
         {
-            ui.in = new DataInputStream(socket.getInputStream());
-            ui.out = new DataOutputStream(socket.getOutputStream());
-        } catch (IOException e)
+            client = new LocalClientWebSocket(new URI("ws://localhost:7676"), ui.textArea);
+        } catch (URISyntaxException e)
         {
-            System.out.println("I/O error: " + e);
+            System.out.println("URI error: " + e);
             frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             return;
         }
+        client.connect();
+        ui.textArea.setText("Connected to server\n");
 
         ui.gson = new Gson();
         ui.textField.addActionListener(_ ->
@@ -124,39 +96,6 @@ public class LocalClient
             }
             ui.textField.setText("");
         });
-
-        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        while (true)
-        {
-            try
-            {
-                String response = ui.in.readUTF();
-                try
-                {
-                    JsonElement jsonElement = JsonParser.parseString(response);
-                    String prettyJson = prettyGson.toJson(jsonElement);
-                    ui.textArea.setText(prettyJson);
-                } catch (JsonParseException e)
-                {
-                    ui.textArea.setText(response);
-                }
-            } catch (EOFException e)
-            {
-                System.out.println("EOF error: " + e);
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                return;
-            } catch (IOException e)
-            {
-                System.out.println("I/O error: " + e);
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                return;
-            } catch (Exception e)
-            {
-                System.out.println("Error: " + e);
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                return;
-            }
-        }
     }
 
     private void help()
@@ -200,13 +139,8 @@ public class LocalClient
         String dataJson = gson.toJson(playerDataLoginDTO);
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("login", dataJson);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void listLeaderboard(String[] commandData)
@@ -219,13 +153,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("listleaderboard", "");
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void listGames(String[] commandData)
@@ -238,13 +167,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("listgames", "");
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void startGame(String[] commandData)
@@ -257,13 +181,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("startgame", commandData[1]);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void joinGame(String[] commandData)
@@ -285,13 +204,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("joingame", commandData[1]);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void leaveGame(String[] commandData)
@@ -304,13 +218,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("leavegame", "");
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void ready(String[] commandData)
@@ -323,13 +232,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("ready", "");
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void unready(String[] commandData)
@@ -342,13 +246,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("unready", "");
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void move(String[] commandData)
@@ -374,13 +273,8 @@ public class LocalClient
         String dataJson = gson.toJson(playerDataMoveDTO);
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("move", dataJson);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void pickup(String[] commandData)
@@ -402,13 +296,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("pickup", commandData[1]);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void trash(String[] commandData)
@@ -430,13 +319,8 @@ public class LocalClient
 
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("trash", commandData[1]);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void store(String[] commandData)
@@ -468,13 +352,8 @@ public class LocalClient
         String dataJson = gson.toJson(playerDataStructureDTO);
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("store", dataJson);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 
     private void steal(String[] commandData)
@@ -506,12 +385,7 @@ public class LocalClient
         String dataJson = gson.toJson(playerDataStructureDTO);
         PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("steal", dataJson);
         String commandJson = gson.toJson(playerCommandDTO);
-        try
-        {
-            out.writeUTF(commandJson);
-        } catch (IOException e)
-        {
-            System.out.println("I/O error: " + e);
-        }
+
+        client.send(commandJson);
     }
 }
