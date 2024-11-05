@@ -14,7 +14,7 @@ public class GameSession
     private final int gameId;
     private final String gameName;
     private final Hashtable<Integer, Player> players;
-    private final Hashtable<Integer, Boolean> playerReady;
+    private final Hashtable<Integer, Boolean> readyMap;
     private final Hashtable<Integer, Structure> structures;
     private final Hashtable<Integer, MaterialEntity> materials;
 
@@ -39,7 +39,8 @@ public class GameSession
         this.gameName = gameName;
         players = new Hashtable<>();  // The game starts with no players
         players.put(player.getUserId(), player);
-        playerReady = new Hashtable<>();  // The game starts with no players ready
+        readyMap = new Hashtable<>();  // The game starts with no players ready
+        readyMap.put(player.getUserId(), false);
         gameStatus = 0;  // The game starts in the lobby
         structures = new Hashtable<>();  // The game starts with no structures
         materials = new Hashtable<>();  // The game starts with no materials
@@ -122,7 +123,7 @@ public class GameSession
             if (gameStatus == 0)
             {
                 players.put(player.getUserId(), player);
-                playerReady.put(player.getUserId(), false);
+                readyMap.put(player.getUserId(), false);
                 return true;
             }
             return false;
@@ -137,7 +138,7 @@ public class GameSession
         synchronized (EnterReadyExitLock)
         {
             Player removedPlayer = players.remove(playerId);
-            playerReady.remove(playerId);
+            readyMap.remove(playerId);
             if (removedPlayer == null)
             {
                 return;
@@ -169,12 +170,12 @@ public class GameSession
     {
         synchronized (EnterReadyExitLock)
         {
-            if (!playerReady.containsKey(playerId))
+            if (!readyMap.containsKey(playerId))
             {
                 return;
             }
 
-            playerReady.put(playerId, ready);
+            readyMap.put(playerId, ready);
             if (ready)
             {
                 tryStartGame();
@@ -195,7 +196,7 @@ public class GameSession
             return;
         }
 
-        for (Boolean ready : playerReady.values())
+        for (Boolean ready : readyMap.values())
         {
             if (!ready)
             {
@@ -337,10 +338,14 @@ public class GameSession
         GameSessionString.append("\"name\":\"").append(gameName).append("\",");
 
         GameSessionString.append("\"players\":[");
-        for (Player player : players.values())
-        {
-            GameSessionString.append(player).append(",");
-        }
+        players.values().forEach(player ->
+                GameSessionString.append(player).append(","));
+        GameSessionString.deleteCharAt(GameSessionString.length() - 1);
+        GameSessionString.append("],");
+
+        GameSessionString.append("\"readyMap\":[");
+        readyMap.forEach((playerId, ready) ->
+                GameSessionString.append("{\"playerId\":").append(playerId).append(",\"ready\":").append(ready).append("},"));
         GameSessionString.deleteCharAt(GameSessionString.length() - 1);
         GameSessionString.append("],");
 
@@ -349,10 +354,8 @@ public class GameSession
         GameSessionString.append("\"gameState\":").append(gameStatus).append(",");
 
         GameSessionString.append("\"materials\":[");
-        for (MaterialEntity material : materials.values())
-        {
-            GameSessionString.append(material).append(",");
-        }
+        materials.values().forEach(material ->
+                GameSessionString.append(material).append(","));
         if (!materials.isEmpty())
         {
             GameSessionString.deleteCharAt(GameSessionString.length() - 1);
@@ -360,10 +363,8 @@ public class GameSession
         GameSessionString.append("],");
 
         GameSessionString.append("\"structures\":[");
-        for (Structure structure : structures.values())
-        {
-            GameSessionString.append(structure).append(",");
-        }
+        structures.values().forEach(structure ->
+                GameSessionString.append(structure).append(","));
         if (!structures.isEmpty())
         {
             GameSessionString.deleteCharAt(GameSessionString.length() - 1);

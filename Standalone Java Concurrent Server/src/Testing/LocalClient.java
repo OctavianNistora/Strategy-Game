@@ -19,6 +19,7 @@ public class LocalClient
     private JPanel mainPanel;
     private JTextArea textArea;
     private JTextField textField;
+    private JScrollPane scrollPane;
     private DataInputStream in;
     private DataOutputStream out;
     private Gson gson;
