@@ -1,0 +1,16 @@
+Runnables\GameSessionBroadcastRunnable.class
+ServerClasses\Player.class
+DTOs\PlayerDataStructureDTO.class
+DTOs\PlayerDataMoveDTO.class
+ServerClasses\GameSession.class
+ServerClasses\Server.class
+Runnables\PlayerRunnable.class
+DTOs\PlayerDataLoginDTO.class
+RecordsEnums\MaterialEnum.class
+DTOs\PlayerCommandDTO.class
+ServerClasses\Structure.class
+Testing\LocalClient.class
+Runnables\GameSessionSpawnerRunnable.class
+RecordsEnums\LeaderboardRow.class
+RecordsEnums\MaterialEntity.class
+RecordsEnums\GamesListRow.class

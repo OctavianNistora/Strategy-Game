@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Standalone Java Concurrent Server/Standalone Java Concurrent Server.iml" filepath="$PROJECT_DIR$/Standalone Java Concurrent Server/Standalone Java Concurrent Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Strategy-Game.iml" filepath="$PROJECT_DIR$/.idea/Strategy-Game.iml" />
     </modules>
   </component>
