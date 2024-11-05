@@ -1,13 +1,13 @@
-package Runnables;
+package com.aiabon.server.concurrent.Runnables;
 
-import DTOs.PlayerDataLoginDTO;
-import DTOs.PlayerCommandDTO;
-import DTOs.PlayerDataMoveDTO;
-import DTOs.PlayerDataStructureDTO;
-import RecordsEnums.GamesListRow;
-import RecordsEnums.LeaderboardRow;
-import RecordsEnums.MaterialEnum;
-import ServerClasses.Player;
+import com.aiabon.server.concurrent.DTOs.PlayerDataLoginDTO;
+import com.aiabon.server.concurrent.DTOs.PlayerCommandDTO;
+import com.aiabon.server.concurrent.DTOs.PlayerDataMoveDTO;
+import com.aiabon.server.concurrent.DTOs.PlayerDataStructureDTO;
+import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
+import com.aiabon.server.concurrent.RecordsEnums.LeaderboardRow;
+import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
+import com.aiabon.server.concurrent.ServerClasses.Player;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 

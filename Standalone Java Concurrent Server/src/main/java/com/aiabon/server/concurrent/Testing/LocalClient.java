@@ -1,9 +1,9 @@
-package Testing;
+package com.aiabon.server.concurrent.Testing;
 
-import DTOs.PlayerCommandDTO;
-import DTOs.PlayerDataLoginDTO;
-import DTOs.PlayerDataMoveDTO;
-import DTOs.PlayerDataStructureDTO;
+import com.aiabon.server.concurrent.DTOs.PlayerCommandDTO;
+import com.aiabon.server.concurrent.DTOs.PlayerDataLoginDTO;
+import com.aiabon.server.concurrent.DTOs.PlayerDataMoveDTO;
+import com.aiabon.server.concurrent.DTOs.PlayerDataStructureDTO;
 import com.google.gson.*;
 
 import javax.swing.*;
@@ -192,7 +192,7 @@ public class LocalClient
 
         } catch (NumberFormatException e)
         {
-            textArea.append("ServerClasses.Player ID must be an integer\n");
+            textArea.append("com.aiabon.server.concurrent.ServerClasses.Player ID must be an integer\n");
             return;
         }
 
@@ -460,7 +460,7 @@ public class LocalClient
             Integer.parseInt(commandData[2]);
         } catch (NumberFormatException e)
         {
-            textArea.append("ServerClasses.Structure ID must be an integer\n");
+            textArea.append("com.aiabon.server.concurrent.ServerClasses.Structure ID must be an integer\n");
             return;
         }
 
@@ -498,7 +498,7 @@ public class LocalClient
             Integer.parseInt(commandData[2]);
         } catch (NumberFormatException e)
         {
-            textArea.append("ServerClasses.Structure ID must be an integer\n");
+            textArea.append("com.aiabon.server.concurrent.ServerClasses.Structure ID must be an integer\n");
             return;
         }
 

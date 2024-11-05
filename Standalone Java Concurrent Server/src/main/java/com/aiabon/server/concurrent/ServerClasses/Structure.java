@@ -1,6 +1,6 @@
-package ServerClasses;
+package com.aiabon.server.concurrent.ServerClasses;
 
-import RecordsEnums.MaterialEnum;
+import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
 
 import java.util.Collection;
 import java.util.Hashtable;

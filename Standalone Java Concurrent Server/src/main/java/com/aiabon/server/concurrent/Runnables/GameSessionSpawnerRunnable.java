@@ -1,6 +1,6 @@
-package Runnables;
+package com.aiabon.server.concurrent.Runnables;
 
-import ServerClasses.GameSession;
+import com.aiabon.server.concurrent.ServerClasses.GameSession;
 
 /// Runnable class that is responsible for spawning materials in the game session until the maximum number of materials is reached or the game session has ended.
 public class GameSessionSpawnerRunnable implements Runnable

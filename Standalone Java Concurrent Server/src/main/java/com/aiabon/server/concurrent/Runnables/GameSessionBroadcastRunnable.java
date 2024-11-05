@@ -1,6 +1,6 @@
-package Runnables;
+package com.aiabon.server.concurrent.Runnables;
 
-import ServerClasses.GameSession;
+import com.aiabon.server.concurrent.ServerClasses.GameSession;
 
 /// Runnable class that broadcasts the game state (snapshot) to all players in the game session at a fixed rate until the game ends
 public class GameSessionBroadcastRunnable implements Runnable

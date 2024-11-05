@@ -1,10 +1,7 @@
-package ServerClasses;
+package com.aiabon.server.concurrent.ServerClasses;
 
-import RecordsEnums.GamesListRow;
-import Runnables.PlayerRunnable;
+import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
 
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.Collection;
 import java.util.Hashtable;
 
@@ -12,44 +9,9 @@ import java.util.Hashtable;
 public class Server
 {
     private static Server instance = null;
-    private static final int PORT = 7676;
 
     private final Hashtable<Integer, GameSession> availableGames = new Hashtable<>();
     private int nextGameId = 1;
-
-    public static void main(String[] args)
-    {
-        ServerSocket serverSocket;
-        Socket socket = null;
-        int threadCount = 1;
-
-        try
-        {
-            //noinspection resource
-            serverSocket = new ServerSocket(PORT);
-        } catch (Exception e)
-        {
-            System.out.println("Error: " + e);
-            return;
-        }
-
-        //noinspection InfiniteLoopStatement
-        while (true)
-        {
-            try
-            {
-                socket = serverSocket.accept();
-            } catch (Exception e)
-            {
-                System.out.println("Main I/O error: " + e);
-            }
-
-            PlayerRunnable playerRunnable = new PlayerRunnable(threadCount, socket);
-            Thread playerThread = new Thread(playerRunnable);
-            playerThread.start();
-            threadCount++;
-        }
-    }
 
     /// Get the singleton instance of the server.
     public static Server getInstance()
@@ -63,7 +25,7 @@ public class Server
 
     /// Returns an array of games that are available to join.
     ///
-    /// @return An array of <code>RecordsEnums.GamesListRow</code> representing the available games.
+    /// @return An array of <code>com.aiabon.server.concurrent.RecordsEnums.GamesListRow</code> representing the available games.
     public GamesListRow[] getAvailableGamesList()
     {
         Collection<GameSession> availableGamesSnapshot = availableGames.values();
@@ -81,7 +43,7 @@ public class Server
     ///
     /// @param gameName The name of the game.
     /// @param player The player that will be the host of the game.
-    /// @return The <code>ServerClasses.GameSession</code> object representing the new game.
+    /// @return The <code>com.aiabon.server.concurrent.ServerClasses.GameSession</code> object representing the new game.
     public synchronized GameSession createGame(String gameName, Player player)
     {
         GameSession game = new GameSession(nextGameId, gameName, player);
@@ -94,7 +56,7 @@ public class Server
     ///
     /// @param player The player to add to the game.
     /// @param gameId The ID of the game to add the player to.
-    /// @return The <code>ServerClasses.GameSession</code> object representing the game the player was added to, or <code>null</code> if the player could not be added.
+    /// @return The <code>com.aiabon.server.concurrent.ServerClasses.GameSession</code> object representing the game the player was added to, or <code>null</code> if the player could not be added.
     public GameSession tryAddPlayerToGame(Player player, int gameId)
     {
         GameSession game = availableGames.get(gameId);

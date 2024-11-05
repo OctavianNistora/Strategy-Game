@@ -1,4 +1,4 @@
-package RecordsEnums;
+package com.aiabon.server.concurrent.RecordsEnums;
 
 /// Represents a material entity in the game that can be picked up by a player
 ///

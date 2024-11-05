@@ -1,29 +1,29 @@
-package ServerClasses;
+package com.aiabon.server.concurrent.ServerClasses;
 
-import RecordsEnums.GamesListRow;
-import RecordsEnums.LeaderboardRow;
-import RecordsEnums.MaterialEntity;
-import RecordsEnums.MaterialEnum;
-import Runnables.PlayerRunnable;
+import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
+import com.aiabon.server.concurrent.RecordsEnums.LeaderboardRow;
+import com.aiabon.server.concurrent.RecordsEnums.MaterialEntity;
+import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
+import com.aiabon.server.concurrent.Runnables.PlayerRunnable;
 
 /// Represents a player in the game. The methods in this class are used to interact with the game the player is in,
 /// while also keeping track of the player's inner state and checking if game session allows the player to any action.
 public class Player
 {
-    // ServerClasses.Server instance
-    // Slightly faster than calling ServerClasses.Server.getInstance() every time
+    // com.aiabon.server.concurrent.ServerClasses.Server instance
+    // Slightly faster than calling com.aiabon.server.concurrent.ServerClasses.Server.getInstance() every time
     private static final Server server = Server.getInstance();
     private final PlayerRunnable runnable;
-    // ServerClasses.Player's unique identifier
+    // com.aiabon.server.concurrent.ServerClasses.Player's unique identifier
     private final int userId;
-    // ServerClasses.Player's name
+    // com.aiabon.server.concurrent.ServerClasses.Player's name
     private final String name;
 
     // Game the player is currently in
     private GameSession gameSession;
-    // ServerClasses.Player's position in the game (double instead of float for additional precision)
+    // com.aiabon.server.concurrent.ServerClasses.Player's position in the game (double instead of float for additional precision)
     private double[] position;
-    // ServerClasses.Player's inventory
+    // com.aiabon.server.concurrent.ServerClasses.Player's inventory
     private MaterialEnum[] inventory;
     // Number of materials the player has in their inventory
     private int materialCount;
@@ -59,7 +59,7 @@ public class Player
     /// Gets the player stats (name, wins, losses) for the first 15 players sorted by the player's wins in
     /// descending, and also the stats for the player calling this method, who is the first player in the array.
     ///
-    /// @return an array of <code>RecordsEnums.LeaderboardRow</code> objects of length less
+    /// @return an array of <code>com.aiabon.server.concurrent.RecordsEnums.LeaderboardRow</code> objects of length less
     /// than 17, or <code>null</code> if the server loses connection to the database
     public LeaderboardRow[] getLeaderboard()
     {
@@ -69,7 +69,7 @@ public class Player
 
     /// Gets the list of available games that the player can join.
     ///
-    /// @return an array of <code>RecordsEnums.GamesListRow</code> objects
+    /// @return an array of <code>com.aiabon.server.concurrent.RecordsEnums.GamesListRow</code> objects
     public GamesListRow[] getAvailableGamesList()
     {
         return server.getAvailableGamesList();

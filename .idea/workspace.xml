@@ -4,13 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="Added Maven support to concurrent server subproject">
-      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/.gitignore" afterDir="false" />
+    <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="Added additional gitignore in subproject">
+      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/ServerClasses/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/ServerClasses/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,6 +66,7 @@
     "Maven.strategy-game-java-concurrent-server [validate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Sularfy/IdeaProjects/Strategy-Game",
@@ -68,7 +79,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.LocalClient">
+  <component name="RunManager">
     <configuration name="LocalClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Testing.LocalClient" />
       <module name="Standalone Java Concurrent Server" />
@@ -82,27 +93,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ServerClasses.Server" />
-      <module name="Standalone Java Concurrent Server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ServerClasses.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.LocalClient" />
-      <item itemvalue="Application.Server" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.LocalClient" />
-        <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +115,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1730832967350</updated>
-      <workItem from="1730832968051" duration="725000" />
+      <workItem from="1730832968051" duration="1641000" />
     </task>
     <task id="LOCAL-00001" summary="Added Maven support to concurrent server subproject">
       <option name="closed" value="true" />
@@ -132,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730833558440</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added additional gitignore in subproject">
+      <option name="closed" value="true" />
+      <created>1730833822343</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1730833822343</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +141,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Maven support to concurrent server subproject" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Maven support to concurrent server subproject" />
+    <MESSAGE value="Added additional gitignore in subproject" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added additional gitignore in subproject" />
   </component>
 </project>

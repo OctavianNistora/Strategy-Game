@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.aiabon</groupId>
-    <artifactId>strategy-game-java-concurrent-server</artifactId>
+    <artifactId>server-concurrent</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
