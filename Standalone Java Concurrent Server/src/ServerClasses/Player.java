@@ -6,9 +6,8 @@ import RecordsEnums.MaterialEntity;
 import RecordsEnums.MaterialEnum;
 import Runnables.PlayerRunnable;
 
-/**
- * Represents a player in the game.
- */
+/// Represents a player in the game. The methods in this class are used to interact with the game the player is in,
+/// while also keeping track of the player's inner state and checking if game session allows the player to any action.
 public class Player
 {
     // ServerClasses.Server instance
