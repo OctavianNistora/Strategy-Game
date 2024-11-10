@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Data Access/Data Access.iml" filepath="$PROJECT_DIR$/Data Access/Data Access.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Strategy-Game.iml" filepath="$PROJECT_DIR$/.idea/Strategy-Game.iml" />
     </modules>
   </component>
