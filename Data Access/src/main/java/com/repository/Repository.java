@@ -15,7 +15,7 @@ public class Repository<T> {
         this.entityClass = entityClass;
     }
 
-    public T findById(int id) {
+    public T findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(entityClass, id);
         }
@@ -63,7 +63,7 @@ public class Repository<T> {
         }
     }
 
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
