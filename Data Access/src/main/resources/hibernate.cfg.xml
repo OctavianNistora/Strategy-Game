@@ -12,6 +12,5 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="main.java.com.entity.Game"/>
         <mapping class="main.java.com.entity.Player"/>
-        <mapping class="main.java.com.entity.GamePlayer"/>
     </session-factory>
 </hibernate-configuration>

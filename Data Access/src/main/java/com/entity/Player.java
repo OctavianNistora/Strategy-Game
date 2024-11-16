@@ -1,11 +1,39 @@
 package main.java.com.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "Player")
+@Table(name = "players")
 public class Player {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "participants")
+    private List<Game> gamesPlayed;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "player_games_won",
+            joinColumns = @JoinColumn(name = "player_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
+    private List<Game> gamesWon;
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -38,35 +66,19 @@ public class Player {
         this.password = password;
     }
 
-    public Set<Game> getGamesWon() {
-        return gamesWon;
-    }
-
-    public void setGamesWon(Set<Game> gamesWon) {
-        this.gamesWon = gamesWon;
-    }
-
-    public Set<GamePlayer> getGamesPlayed() {
+    public List<Game> getGamesPlayed() {
         return gamesPlayed;
     }
 
-    public void setGamesPlayed(Set<GamePlayer> gamesPlayed) {
+    public void setGamesPlayed(List<Game> gamesPlayed) {
         this.gamesPlayed = gamesPlayed;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public List<Game> getGamesWon() {
+        return gamesWon;
+    }
 
-    private String username;
-    private String name;
-    private String password;
-
-    @OneToMany(mappedBy = "winner")
-    private Set<Game> gamesWon;
-
-    @OneToMany(mappedBy = "player")
-    private Set<GamePlayer> gamesPlayed;
-
-    // Getters and Setters
+    public void setGamesWon(List<Game> gamesWon) {
+        this.gamesWon = gamesWon;
+    }
 }

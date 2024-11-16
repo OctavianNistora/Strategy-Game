@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="More file/folder organization">
-      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/SessionFactorySingleton.java" afterDir="false" />
+    <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="add main class for testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/Data Access.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/Data Access.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/entity/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/entity/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/entity/GamePlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,12 +33,12 @@
     &quot;assignee&quot;: &quot;OctavianNistora&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/OctavianNistora/Strategy-Game.git&quot;,
-    &quot;accountId&quot;: &quot;fba343e5-b792-419f-81b3-7fdc37ecae8f&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/OctavianNistora/Strategy-Game.git",
+    "accountId": "52017c72-8e44-48d9-bb20-9f1214f22686"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -186,7 +186,39 @@
       <option name="project" value="LOCAL" />
       <updated>1730834718799</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add library and resource folder">
+      <option name="closed" value="true" />
+      <created>1731754090179</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731754090179</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add session factory singleton class">
+      <option name="closed" value="true" />
+      <created>1731754136152</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731754136152</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change configuration files">
+      <option name="closed" value="true" />
+      <created>1731754150519</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731754150519</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add main class for testing">
+      <option name="closed" value="true" />
+      <created>1731754159276</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731754159276</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +228,10 @@
     <MESSAGE value="Added Maven support to concurrent server subproject" />
     <MESSAGE value="Added additional gitignore in subproject" />
     <MESSAGE value="More file/folder organization" />
-    <option name="LAST_COMMIT_MESSAGE" value="More file/folder organization" />
+    <MESSAGE value="add library and resource folder" />
+    <MESSAGE value="add session factory singleton class" />
+    <MESSAGE value="change configuration files" />
+    <MESSAGE value="add main class for testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="add main class for testing" />
   </component>
 </project>

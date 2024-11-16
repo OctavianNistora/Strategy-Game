@@ -1,11 +1,34 @@
 package main.java.com.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "Game")
+@Table(name = "games")
 public class Game {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "winner_id")
+    private Player winner;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "game_players",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id")
+    )
+    private List<Player> participants;
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -30,26 +53,11 @@ public class Game {
         this.winner = winner;
     }
 
-    public Set<GamePlayer> getPlayers() {
-        return players;
+    public List<Player> getParticipants() {
+        return participants;
     }
 
-    public void setPlayers(Set<GamePlayer> players) {
-        this.players = players;
+    public void setParticipants(List<Player> participants) {
+        this.participants = participants;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "winnerId")
-    private Player winner;
-
-    @OneToMany(mappedBy = "game")
-    private Set<GamePlayer> players;
-
-    // Getters and Setters
 }
