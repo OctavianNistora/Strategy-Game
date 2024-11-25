@@ -34,7 +34,7 @@ public class GameSessionBroadcastRunnable implements Runnable
                 game.broadcastGameState();
                 Thread.sleep(1000);
             }
-        } catch (InterruptedException _)
+        } catch (InterruptedException ex)
         {
             Thread.currentThread().interrupt();
         }

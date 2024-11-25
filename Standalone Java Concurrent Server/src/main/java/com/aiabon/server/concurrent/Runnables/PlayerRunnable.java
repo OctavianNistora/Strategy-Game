@@ -1,13 +1,11 @@
 package com.aiabon.server.concurrent.Runnables;
 
-import com.aiabon.server.concurrent.DTOs.PlayerDataLoginDTO;
-import com.aiabon.server.concurrent.DTOs.PlayerCommandDTO;
-import com.aiabon.server.concurrent.DTOs.PlayerDataMoveDTO;
-import com.aiabon.server.concurrent.DTOs.PlayerDataStructureDTO;
+import com.aiabon.server.concurrent.DTOs.*;
 import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
 import com.aiabon.server.concurrent.RecordsEnums.LeaderboardRow;
 import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
 import com.aiabon.server.concurrent.ServerClasses.Player;
+import com.aiabon.server.concurrent.ServerClasses.SingletonServer;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import org.java_websocket.WebSocket;
@@ -21,6 +19,7 @@ public class PlayerRunnable implements Runnable
     private final LinkedBlockingQueue<String> input;
     private final WebSocket output;
     private Player player;
+    private int tempPlayerId;
 
     public PlayerRunnable(int id, LinkedBlockingQueue<String> input, WebSocket output)
     {
@@ -43,19 +42,21 @@ public class PlayerRunnable implements Runnable
                 try
                 {
                     PlayerCommandDTO playerCommandDTO = gson.fromJson(playerName, PlayerCommandDTO.class);
+                    PlayerDataLoginDTO playerDataLoginDTO = gson.fromJson(playerCommandDTO.data(), PlayerDataLoginDTO.class);
+                    tempPlayerId = playerDataLoginDTO.id();
                     if (playerCommandDTO.command().equals("login"))
                     {
-                        PlayerDataLoginDTO playerDataLoginDTO = gson.fromJson(playerCommandDTO.data(), PlayerDataLoginDTO.class);
                         player = new Player(this, playerDataLoginDTO.id(), playerDataLoginDTO.name());
-                        output.send("Successfully logged in player");
+                        output.send(createPlayerCommandResponse("loginResponse", player.getUserId(), "Successfully logged in player"));
+                        input.clear();
                         break;
                     } else
                     {
-                        output.send("Invalid player data format");
+                        output.send(createPlayerCommandResponse("loginResponse", tempPlayerId, "Invalid player data format"));
                     }
                 } catch (JsonSyntaxException e)
                 {
-                    output.send("Invalid player data format");
+                    output.send(createPlayerCommandResponse("loginResponse", tempPlayerId, "Invalid player data format"));
                 }
             } catch (Exception e)
             {
@@ -80,13 +81,17 @@ public class PlayerRunnable implements Runnable
                 {
                     case "listleaderboard":
                         LeaderboardRow[] leaderboard = player.getLeaderboard();
-                        output.send(gson.toJson(leaderboard));
+                        if (leaderboard == null) {
+                            output.send(createPlayerCommandResponse("listleaderboard", player.getUserId(), "No leaderboard data available"));
+                            break;
+                        }
+                        output.send(createPlayerCommandResponse("listleaderboard", player.getUserId(), gson.toJson(leaderboard)));
                         break;
                     case "listgames":
                         GamesListRow[] gamesList = player.getAvailableGamesList();
                         if (gamesList == null)
                         {
-                            output.send("No games available");
+                            output.send(createPlayerCommandResponse("listleaderboard", player.getUserId(), "No leaderboard data available"));
                             break;
                         }
                         output.send(gson.toJson(gamesList));
@@ -178,7 +183,7 @@ public class PlayerRunnable implements Runnable
                         }
                         break;
                     default:
-                        output.send("Invalid command");
+                        output.send(createPlayerCommandResponse("invalidResponse", player.getUserId(), "Invalid response"));
                         break;
                 }
             } catch (Exception e)
@@ -190,12 +195,16 @@ public class PlayerRunnable implements Runnable
         }
     }
 
+    private String createPlayerCommandResponse(String command, int playerId, String responseMessage) {
+        return new Gson().toJson(new PlayerCommandResponseDTO(command, new PlayerCommandResponseDataDTO(playerId, responseMessage)));
+    }
+
     public void sendGameState(String gameState)
     {
         try
         {
             System.out.println(System.currentTimeMillis() + " Thread " + id + ": Sending game state");
-            output.send(gameState);
+            output.send(createPlayerCommandResponse("gameState", player.getUserId(), gameState));
         } catch (Exception e)
         {
             System.out.println("Thread " + id + " error: " + e);
