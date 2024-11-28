@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="More file/folder organization">
-      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/SingletonServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClientWebSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/SessionFactorySingleton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/GameSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/GameSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.form" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Access/Data Access.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/Data Access.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,18 +27,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "OctavianNistora"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;OctavianNistora&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/OctavianNistora/Strategy-Game.git",
-    "accountId": "fba343e5-b792-419f-81b3-7fdc37ecae8f"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/OctavianNistora/Strategy-Game.git&quot;,
+    &quot;accountId&quot;: &quot;fba343e5-b792-419f-81b3-7fdc37ecae8f&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -57,15 +51,14 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2oRWeiaYXJyia9JbdQI2DDsCwIq" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
@@ -73,6 +66,8 @@
     "Application.LocalClient.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.Server.executor": "Run",
+    "Application.main.java.com.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
     "Maven.concurrent-server [clean].executor": "Run",
     "Maven.concurrent-server [compile].executor": "Run",
     "Maven.concurrent-server [validate].executor": "Run",
@@ -82,10 +77,13 @@
     "Maven.strategy-game-java-concurrent-server [clean].executor": "Run",
     "Maven.strategy-game-java-concurrent-server [compile].executor": "Run",
     "Maven.strategy-game-java-concurrent-server [validate].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "data-access",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Sularfy/IdeaProjects/Strategy-Game",
     "node.js.detected.package.eslint": "true",
@@ -93,11 +91,15 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "onboarding.tips.debug.path": "C:/Users/alex/IdeaProjects/Strategy-Game/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Main.java",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.38505748",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.LocalClient">
+  <component name="RunManager" selected="Application.main.java.com.Main">
     <configuration name="LocalClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.aiabon.server.concurrent.Testing.LocalClient" />
       <module name="Standalone Java Concurrent Server" />
@@ -124,24 +126,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="main.java.com.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.java.com.Main" />
+      <module name="Data Access" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.com.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
+      <item itemvalue="Application.main.java.com.Main" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.LocalClient" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.main.java.com.Main" />
         <item itemvalue="Application.LocalClient" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

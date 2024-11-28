@@ -31,7 +31,7 @@ public class LocalClient
 
         try
         {
-            client = new LocalClientWebSocket(new URI("ws://localhost:7676"), ui.textArea);
+            client = new LocalClientWebSocket(new URI("ws://localhost:8080/websocket"), ui.textArea);
         } catch (URISyntaxException e)
         {
             System.out.println("URI error: " + e);
@@ -42,7 +42,7 @@ public class LocalClient
         ui.textArea.setText("Connected to server\n");
 
         ui.gson = new Gson();
-        ui.textField.addActionListener(_ ->
+        ui.textField.addActionListener((al) ->
         {
             String command = ui.textField.getText();
             String[] commandParts = command.split(" ");

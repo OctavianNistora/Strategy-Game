@@ -76,7 +76,7 @@ public class Structure
 
         stage++;
         // The structure resets the progress of each material when advancing to the next stage
-        progress.forEach((material, _) -> progress.put(material, 0));
+        progress.forEach((material, m) -> progress.put(material, 0));
     }
 
     /// Returns whether the structure is complete.

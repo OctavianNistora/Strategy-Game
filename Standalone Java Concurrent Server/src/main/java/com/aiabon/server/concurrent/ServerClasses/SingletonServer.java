@@ -1,5 +1,9 @@
 package com.aiabon.server.concurrent.ServerClasses;
 
+import org.java_websocket.client.WebSocketClient;
+
+import java.net.URI;
+
 public class SingletonServer
 {
     private static Server server = null;
