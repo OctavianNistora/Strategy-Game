@@ -20,10 +20,24 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketHandler extends TextWebSocketHandler {
     private static final Map<Integer, WebSocketSession> playerSessions = new ConcurrentHashMap<>();
     private WebSocketSession concurrentServerSession;
+    private Boolean connectedToConcurrentServer = false;
 
-    public WebSocketHandler() {
-        WebSocketClient client = new StandardWebSocketClient();
-        client.execute(createConcurrentServerHandler(), "ws://localhost:7676");
+    public WebSocketHandler() throws InterruptedException {
+        TryToEastablishConnectionToConcurrentServer();
+    }
+
+    private void TryToEastablishConnectionToConcurrentServer() throws InterruptedException {
+        while (!connectedToConcurrentServer) {
+            try {
+                System.out.println("Trying to connect to concurrent server...");
+                WebSocketClient client = new StandardWebSocketClient();
+                client.execute(createConcurrentServerHandler(), "ws://localhost:7676");
+                Thread.sleep(2000);
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private TextWebSocketHandler createConcurrentServerHandler() {
@@ -32,6 +46,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
             public void afterConnectionEstablished(WebSocketSession session) {
                 concurrentServerSession = session;
                 System.out.println("Connected to concurrent server");
+                connectedToConcurrentServer = true;
             }
 
             @Override
@@ -42,6 +57,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
                 PlayerCommandResponseDTO playerCommandDTO = gson.fromJson(message.getPayload(), PlayerCommandResponseDTO.class);
                 int playerId = playerCommandDTO.playerCommandResponse().playerId();
                 sendToPlayerClient(playerId, message);
+            }
+
+            @Override
+            public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+                connectedToConcurrentServer = false;
+                TryToEastablishConnectionToConcurrentServer();
             }
         };
     }
