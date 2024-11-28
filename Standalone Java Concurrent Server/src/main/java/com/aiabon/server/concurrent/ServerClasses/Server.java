@@ -1,7 +1,9 @@
 package com.aiabon.server.concurrent.ServerClasses;
 
+import com.aiabon.server.concurrent.DTOs.PlayerCommandDTO;
 import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
 import com.aiabon.server.concurrent.Runnables.PlayerRunnable;
+import com.google.gson.Gson;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -26,14 +28,7 @@ public class Server extends WebSocketServer
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake)
     {
-        LinkedBlockingQueue<String> playerQueue = new LinkedBlockingQueue<>();
-        conn.setAttachment(playerQueue);
-
-        PlayerRunnable playerRunnable = new PlayerRunnable(threadCount, playerQueue, conn);
-        Thread playerThread = new Thread(playerRunnable);
-        playerThread.start();
-
-        threadCount++;
+        System.out.println("Opened new connection");
     }
 
     @Override
@@ -41,11 +36,24 @@ public class Server extends WebSocketServer
     {
         LinkedBlockingQueue<String> playerQueue = conn.getAttachment();
         playerQueue.add("stop");
+        System.out.println("Connection closed");
     }
 
     @Override
     public void onMessage(WebSocket conn, String message)
     {
+        Gson gson = new Gson();
+        PlayerCommandDTO playerCommandDTO = gson.fromJson(message, PlayerCommandDTO.class);
+        if (playerCommandDTO.command().equals("login")) {
+            LinkedBlockingQueue<String> playerQueue = new LinkedBlockingQueue<>();
+            conn.setAttachment(playerQueue);
+
+            PlayerRunnable playerRunnable = new PlayerRunnable(threadCount, playerQueue, conn, playerCommandDTO.playerId());
+            Thread playerThread = new Thread(playerRunnable);
+            playerThread.start();
+
+            threadCount++;
+        }
         LinkedBlockingQueue<String> playerQueue = conn.getAttachment();
         playerQueue.add(message);
     }

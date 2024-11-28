@@ -137,7 +137,7 @@ public class LocalClient
 
         PlayerDataLoginDTO playerDataLoginDTO = new PlayerDataLoginDTO(playerID, commandData[2]);
         String dataJson = gson.toJson(playerDataLoginDTO);
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("login", dataJson);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("login", dataJson, 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -151,7 +151,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("listleaderboard", "");
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("listleaderboard", "", 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -165,7 +165,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("listgames", "");
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("listgames", "", 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -179,7 +179,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("startgame", commandData[1]);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("startgame", commandData[1], 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -202,7 +202,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("joingame", commandData[1]);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("joingame", commandData[1], 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -216,7 +216,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("leavegame", "");
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("leavegame", "", 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -230,7 +230,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("ready", "");
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("ready", "", 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -244,7 +244,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("unready", "");
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("unready", "", 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -271,7 +271,7 @@ public class LocalClient
 
         PlayerDataMoveDTO playerDataMoveDTO = new PlayerDataMoveDTO(x, y);
         String dataJson = gson.toJson(playerDataMoveDTO);
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("move", dataJson);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("move", dataJson, 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -294,7 +294,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("pickup", commandData[1]);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("pickup", commandData[1], 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -317,7 +317,7 @@ public class LocalClient
             return;
         }
 
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("trash", commandData[1]);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("trash", commandData[1], 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -350,7 +350,7 @@ public class LocalClient
 
         PlayerDataStructureDTO playerDataStructureDTO = new PlayerDataStructureDTO(Integer.parseInt(commandData[1]), Integer.parseInt(commandData[2]));
         String dataJson = gson.toJson(playerDataStructureDTO);
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("store", dataJson);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("store", dataJson, 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
@@ -383,7 +383,7 @@ public class LocalClient
 
         PlayerDataStructureDTO playerDataStructureDTO = new PlayerDataStructureDTO(Integer.parseInt(commandData[1]), Integer.parseInt(commandData[2]));
         String dataJson = gson.toJson(playerDataStructureDTO);
-        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("steal", dataJson);
+        PlayerCommandDTO playerCommandDTO = new PlayerCommandDTO("steal", dataJson, 2);
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);

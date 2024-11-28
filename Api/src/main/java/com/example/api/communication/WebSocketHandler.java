@@ -81,8 +81,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         PlayerCommandDTO playerCommandDTO = gson.fromJson(payload, PlayerCommandDTO.class);
 
         if (playerCommandDTO.command().equals("login")) {
-            PlayerDataLoginDTO playerData = gson.fromJson(playerCommandDTO.data(), PlayerDataLoginDTO.class);
-            playerSessions.put(playerData.id(), session);
+            playerSessions.put(playerCommandDTO.playerId(), session);
             if (concurrentServerSession != null) {
                 concurrentServerSession.sendMessage(message);
             }
