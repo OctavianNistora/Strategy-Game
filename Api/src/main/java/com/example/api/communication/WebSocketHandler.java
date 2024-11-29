@@ -75,7 +75,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("Received message from client: " + message.getPayload());
         String payload = message.getPayload();
         Gson gson = new Gson();
         PlayerCommandDTO playerCommandDTO = gson.fromJson(payload, PlayerCommandDTO.class);
@@ -85,9 +84,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
             if (concurrentServerSession != null) {
                 concurrentServerSession.sendMessage(message);
             }
-        }
-        if (concurrentServerSession != null) {
-            concurrentServerSession.sendMessage(message);
+        } else {
+            if (concurrentServerSession != null) {
+                concurrentServerSession.sendMessage(message);
+            }
         }
     }
 

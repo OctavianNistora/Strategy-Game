@@ -94,6 +94,7 @@ public class Player
             {
                 return false;
             }
+            System.out.println("Created game with id: " + newGame.getGameId());
 
             gameSession = newGame;
             return true;
@@ -464,7 +465,7 @@ public class Player
 
     public void sendGameState(String gameState)
     {
-        runnable.sendGameState(gameState);
+        runnable.sendGameState(gameState, this.userId);
     }
 
 

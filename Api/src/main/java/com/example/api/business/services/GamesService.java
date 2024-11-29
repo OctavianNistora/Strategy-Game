@@ -3,6 +3,7 @@ package com.example.api.business.services;
 import com.example.api.data.access.entities.Game;
 import com.example.api.data.access.entities.GamePlayer;
 import com.example.api.data.access.entities.Player;
+import com.example.api.data.access.repositories.GamePlayerRepository;
 import com.example.api.data.access.repositories.GameRepository;
 import com.example.api.data.access.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class GamesService {
     @Autowired
     private PlayerRepository playerRepository;
 
+    @Autowired
+    private GamePlayerRepository gamePlayerRepository;
+
     public List<Game> getAllGames() {
         return (List<Game>) gameRepository.findAll();
     }
@@ -34,6 +38,7 @@ public class GamesService {
         Game game = new Game();
         game.setName(name);
 
+        // Set the winner if provided
         if (winnerId != null) {
             Player winner = playerRepository.findById(winnerId)
                     .orElseThrow(() -> new RuntimeException("Winner not found"));
@@ -49,6 +54,9 @@ public class GamesService {
             GamePlayer gamePlayer = new GamePlayer();
             gamePlayer.setGame(finalGame);
             gamePlayer.setPlayer(player);
+
+            gamePlayerRepository.save(gamePlayer);
+
             return gamePlayer;
         }).collect(Collectors.toSet());
 

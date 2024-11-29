@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+@IdClass(GamePlayerId.class)
 @Entity
 @Table(name = "GamePlayer")
 public class GamePlayer implements Serializable {

@@ -56,13 +56,14 @@ public class GamesController {
      * or a 400 Bad Request status if the input data is invalid.
      */
     @PostMapping
-    public ResponseEntity<Game> createGame(@RequestParam String name,
+    public ResponseEntity<String> createGame(@RequestParam String name,
                                            @RequestParam(required = false) Long winnerId,
                                            @RequestParam Set<Long> playerIds) {
         try {
             Game game = gamesService.createGame(name, winnerId, playerIds);
-            return ResponseEntity.ok(game);
+            return ResponseEntity.ok("success");
         } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.badRequest().body(null);
         }
     }

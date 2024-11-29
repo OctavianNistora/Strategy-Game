@@ -5,7 +5,13 @@ import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
 import com.aiabon.server.concurrent.Runnables.GameSessionBroadcastRunnable;
 import com.aiabon.server.concurrent.Runnables.GameSessionSpawnerRunnable;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 /// This class represents a game session. A game session is a game that is being
@@ -277,10 +283,43 @@ public class GameSession
             winner = players.get(structureId);
             gameStatus = 2;
 
-            //TODO: Once the DB is implemented, update the record by adding the winner
+            saveGameToDatabase();
         }
 
         return true;
+    }
+
+    private void saveGameToDatabase() {
+        HttpClient client = HttpClient.newHttpClient();
+
+        Map<Object, Object> data = new HashMap<>();
+        data.put("name", gameName);
+        data.put("winnerId", winner.getUserId());
+
+        for (Player player : players.values()) {
+            data.put("playerIds", player.getUserId());
+        }
+
+        StringBuilder formData = new StringBuilder();
+        data.forEach((key, value) -> formData.append(key).append("=").append(value).append("&"));
+        String formParams = formData.toString();
+        if (formParams.endsWith("&")) {
+            formParams = formParams.substring(0, formParams.length() - 1);
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/api/games"))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .POST(HttpRequest.BodyPublishers.ofString(formParams))
+                .build();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> {
+                    System.out.println("Response Code: " + response.statusCode());
+                    System.out.println("Response Body: " + response.body());
+                    return null;
+                })
+                .join();
     }
 
     /// Tries to remove a material from a structure.
