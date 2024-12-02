@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Standalone Java Concurrent Server" />
+        <module name="server-concurrent" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="server-concurrent" target="23" />
+    </bytecodeTargetLevel>
   </component>
 </project>
