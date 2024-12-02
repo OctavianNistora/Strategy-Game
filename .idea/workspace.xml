@@ -5,17 +5,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="More file/folder organization">
-      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/SessionFactorySingleton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Api/src/main/java/com/example/api/business/services/PlayerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/Standalone Java Concurrent Server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Strategy-Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Strategy-Game.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/Data Access.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/Data Access.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/example/api/communication/WebSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/example/api/communication/WebSocketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/example/api/configuration/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/example/api/configuration/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/example/api/data/access/repositories/PlayerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/example/api/data/access/repositories/PlayerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StrategyGame.Api/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StrategyGame.Api/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StrategyGame.Api/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StrategyGame.Api/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StrategyGame.Api/gradlew.bat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/Api">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/StrategyGame.Api">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/StrategyGame.Api">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Api" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -36,7 +78,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/OctavianNistora/Strategy-Game.git&quot;,
-    &quot;accountId&quot;: &quot;fba343e5-b792-419f-81b3-7fdc37ecae8f&quot;
+    &quot;accountId&quot;: &quot;1f97e269-0ab1-4e7c-895c-0646f9905b0b&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -49,7 +91,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -68,6 +110,8 @@
     "Application.Server.executor": "Run",
     "Application.main.java.com.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.Build Api.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
     "Maven.concurrent-server [clean].executor": "Run",
     "Maven.concurrent-server [compile].executor": "Run",
     "Maven.concurrent-server [validate].executor": "Run",
@@ -80,10 +124,17 @@
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ApiApplication.executor": "Run",
     "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "data-access",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Sularfy/IdeaProjects/Strategy-Game",
     "node.js.detected.package.eslint": "true",
@@ -92,30 +143,17 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/alex/IdeaProjects/Strategy-Game/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Main.java",
-    "project.structure.last.edited": "Global Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.38505748",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.main.java.com.Main">
-    <configuration name="LocalClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.aiabon.server.concurrent.Testing.LocalClient" />
-      <module name="Standalone Java Concurrent Server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.aiabon.server.concurrent.Testing.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Spring Boot.ApiApplication">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.aiabon.server.concurrent.Main" />
-      <module name="Standalone Java Concurrent Server" />
+      <module name="server-concurrent" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.aiabon.server.concurrent.*" />
@@ -126,31 +164,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main.java.com.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.com.Main" />
-      <module name="Data Access" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.com.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Api.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.api.ApiApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.main.java.com.Main" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.LocalClient" />
+      <item itemvalue="Spring Boot.ApiApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.main.java.com.Main" />
-        <item itemvalue="Application.LocalClient" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -161,6 +199,8 @@
       <option name="presentableId" value="Default" />
       <updated>1730832967350</updated>
       <workItem from="1730832968051" duration="7848000" />
+      <workItem from="1733054080303" duration="9849000" />
+      <workItem from="1733125749448" duration="1345000" />
     </task>
     <task id="LOCAL-00001" summary="Added Maven support to concurrent server subproject">
       <option name="closed" value="true" />
