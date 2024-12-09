@@ -1,6 +1,7 @@
 package com.example.api.controllers;
 
 import com.example.api.business.services.GamesService;
+import com.example.api.contracts.DTOs.LeaderboardRowDTO;
 import com.example.api.data.access.entities.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -67,4 +68,5 @@ public class GamesController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
 }

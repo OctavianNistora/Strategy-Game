@@ -1,5 +1,6 @@
 package com.example.api.business.services;
 
+import com.example.api.contracts.DTOs.LeaderboardRowDTO;
 import com.example.api.data.access.entities.Game;
 import com.example.api.data.access.entities.GamePlayer;
 import com.example.api.data.access.entities.Player;
@@ -9,9 +10,7 @@ import com.example.api.data.access.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,5 +62,25 @@ public class GamesService {
         game.setPlayers(players);
 
         return gameRepository.save(game);
+    }
+    public List<LeaderboardRowDTO> getLeaderboardForPlayer(Long playerId) {
+        Player caller = playerRepository.findById(playerId).orElseThrow();
+        List<Player> players = new ArrayList<>();
+
+        playerRepository.findAll().forEach(players::add);
+        List<Player> topPlayers = players.stream()
+                .filter(p -> !p.getName().equals(caller.getName()))
+                .sorted(Comparator.comparingInt(p -> p.getGamesWon().size()))
+                .limit(15)
+                .toList();
+        List<Player> result = new ArrayList<>();
+        result.add(caller);
+        result.addAll(topPlayers);
+        LeaderboardRowDTO[] rows = result.stream().map(p -> new LeaderboardRowDTO(
+                p.getName(),
+                p.getGamesWon().size(),
+                p.getGamesPlayed().size() - p.getGamesWon().size()
+        )).toArray(LeaderboardRowDTO[]::new);
+        return Arrays.stream(rows).toList();
     }
 }

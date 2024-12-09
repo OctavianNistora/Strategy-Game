@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="More file/folder organization">
-      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/SessionFactorySingleton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/Data Access.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/Data Access.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/java/com/repository/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Data Access/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +28,12 @@
     &quot;assignee&quot;: &quot;OctavianNistora&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/OctavianNistora/Strategy-Game.git&quot;,
-    &quot;accountId&quot;: &quot;fba343e5-b792-419f-81b3-7fdc37ecae8f&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/OctavianNistora/Strategy-Game.git",
+    "accountId": "52017c72-8e44-48d9-bb20-9f1214f22686"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -83,9 +78,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "data-access",
+    "git-widget-placeholder": "data",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Sularfy/IdeaProjects/Strategy-Game",
+    "last_opened_file_path": "C:/Users/alex/IdeaProjects/Strategy-Game/Standalone Java Concurrent Server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -191,6 +186,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Maven support to concurrent server subproject" />
