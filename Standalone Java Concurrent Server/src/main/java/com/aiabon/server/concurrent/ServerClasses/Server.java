@@ -88,6 +88,8 @@ public class Server extends WebSocketServer
     {
         GameSession game = new GameSession(nextGameId, gameName, player);
         availableGames.put(game.getGameId(), game);
+        //TODO: Once the DB is implemented, add the game to the DB and get the ID from the DB.
+
         nextGameId++;
         return game;
     }
