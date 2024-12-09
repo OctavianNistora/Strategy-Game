@@ -47,16 +47,16 @@ public class PlayerRunnable implements Runnable
                     if (playerCommandDTO.command().equals("login"))
                     {
                         player = new Player(this, playerDataLoginDTO.id(), playerDataLoginDTO.name());
-                        output.send(createPlayerCommandResponse("loginResponse", player.getUserId(), "Successfully logged in player"));
+                        output.send("Successfully logged in");
                         input.clear();
                         break;
                     } else
                     {
-                        output.send(createPlayerCommandResponse("loginResponse", tempPlayerId, "Invalid player data format"));
+                        output.send("Invalid player data format");
                     }
                 } catch (JsonSyntaxException e)
                 {
-                    output.send(createPlayerCommandResponse("loginResponse", tempPlayerId, "Invalid player data format"));
+                    output.send("Invalid player data format");
                 }
             } catch (Exception e)
             {
@@ -81,19 +81,10 @@ public class PlayerRunnable implements Runnable
                 {
                     case "listleaderboard":
                         LeaderboardRow[] leaderboard = player.getLeaderboard();
-                        if (leaderboard == null) {
-                            output.send(createPlayerCommandResponse("listleaderboard", player.getUserId(), "No leaderboard data available"));
-                            break;
-                        }
-                        output.send(createPlayerCommandResponse("listleaderboard", player.getUserId(), gson.toJson(leaderboard)));
+                        output.send(gson.toJson(leaderboard));
                         break;
                     case "listgames":
                         GamesListRow[] gamesList = player.getAvailableGamesList();
-                        if (gamesList == null)
-                        {
-                            output.send(createPlayerCommandResponse("listleaderboard", player.getUserId(), "No leaderboard data available"));
-                            break;
-                        }
                         output.send(gson.toJson(gamesList));
                         break;
                     case "startgame":
@@ -183,7 +174,7 @@ public class PlayerRunnable implements Runnable
                         }
                         break;
                     default:
-                        output.send(createPlayerCommandResponse("invalidResponse", player.getUserId(), "Invalid response"));
+                        output.send("Invalid command");
                         break;
                 }
             } catch (Exception e)
@@ -195,16 +186,12 @@ public class PlayerRunnable implements Runnable
         }
     }
 
-    private String createPlayerCommandResponse(String command, int playerId, String responseMessage) {
-        return new Gson().toJson(new PlayerCommandResponseDTO(command, new PlayerCommandResponseDataDTO(playerId, responseMessage)));
-    }
-
     public void sendGameState(String gameState)
     {
         try
         {
             System.out.println(System.currentTimeMillis() + " Thread " + id + ": Sending game state");
-            output.send(createPlayerCommandResponse("gameState", player.getUserId(), gameState));
+            output.send(gameState);
         } catch (Exception e)
         {
             System.out.println("Thread " + id + " error: " + e);
