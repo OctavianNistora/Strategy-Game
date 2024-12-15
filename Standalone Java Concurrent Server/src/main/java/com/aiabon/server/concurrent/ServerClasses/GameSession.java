@@ -1,9 +1,12 @@
 package com.aiabon.server.concurrent.ServerClasses;
 
+import com.aiabon.server.concurrent.HibernateUtil;
 import com.aiabon.server.concurrent.RecordsEnums.MaterialEntity;
 import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
 import com.aiabon.server.concurrent.Runnables.GameSessionBroadcastRunnable;
 import com.aiabon.server.concurrent.Runnables.GameSessionSpawnerRunnable;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -185,7 +188,28 @@ public class GameSession
             }
         }
     }
+    private void saveGamePlayerMapping(){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
 
+            String insertGamePlayerQuery = """
+                    INSERT INTO game_player (game_id, player_id)
+                    VALUES (:gameId, :playerId)
+                    ON DUPLICATE KEY UPDATE game_id = game_id
+                    """;
+
+            for (Player player : players.values()) {
+                session.createNativeQuery(insertGamePlayerQuery)
+                        .setParameter("gameId", gameId)
+                        .setParameter("playerId", player.getUserId())
+                        .executeUpdate();
+            }
+
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /// Tries to start the game. The game will start if the game is in the
     /// lobby, there are at least two players and all players are ready.
     private void tryStartGame()
@@ -209,8 +233,7 @@ public class GameSession
         gameStatus = 1;
         SingletonServer.getServer().removeGame(this.gameId);
 
-        //TODO: Once the DB is implemented, insert a new record for each
-        // player-session pair in the mapping (many-to-many) table
+        saveGamePlayerMapping();
 
         Thread gameSessionSpawnerThread = new Thread(new GameSessionSpawnerRunnable(this));
         gameSessionSpawnerThread.start();

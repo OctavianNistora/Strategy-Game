@@ -1,10 +1,19 @@
 package com.aiabon.server.concurrent.ServerClasses;
 
+import com.aiabon.server.concurrent.HibernateUtil;
 import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
 import com.aiabon.server.concurrent.RecordsEnums.LeaderboardRow;
 import com.aiabon.server.concurrent.RecordsEnums.MaterialEntity;
 import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
 import com.aiabon.server.concurrent.Runnables.PlayerRunnable;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /// Represents a player in the game. The methods in this class are used to interact with the game the player is in,
 /// while also keeping track of the player's inner state and checking if game session allows the player to any action.
@@ -61,10 +70,69 @@ public class Player
     ///
     /// @return an array of <code>com.aiabon.server.concurrent.RecordsEnums.LeaderboardRow</code> objects of length less
     /// than 17, or <code>null</code> if the server loses connection to the database
-    public LeaderboardRow[] getLeaderboard()
-    {
-        //TODO: Implement this method once the DB is implemented
-        return null;
+    public LeaderboardRow[] getLeaderboard() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            // Query to fetch top 15 players by wins and calculate losses
+            String hqlTopPlayers = """
+                    SELECT p.name, 
+                           COUNT(DISTINCT g.id) AS wins, 
+                           COUNT(DISTINCT gp.game.id) - COUNT(DISTINCT g.id) AS losses
+                    FROM Player p
+                    LEFT JOIN p.gamesWon g
+                    LEFT JOIN p.gamesPlayed gp
+                    GROUP BY p.id, p.name
+                    ORDER BY wins DESC
+                    """;
+
+            Query<Object[]> query = session.createQuery(hqlTopPlayers, Object[].class);
+            query.setMaxResults(15);
+            List<Object[]> topPlayers = query.getResultList();
+
+            // Query to fetch current player's stats
+            String hqlCurrentPlayer = """
+                    SELECT p.name, 
+                           COUNT(DISTINCT g.id) AS wins, 
+                           COUNT(DISTINCT gp.game.id) - COUNT(DISTINCT g.id) AS losses
+                    FROM Player p
+                    LEFT JOIN p.gamesWon g
+                    LEFT JOIN p.gamesPlayed gp
+                    WHERE p.id = :currentPlayerId
+                    GROUP BY p.id, p.name
+                    """;
+
+            Query<Object[]> currentPlayerQuery = session.createQuery(hqlCurrentPlayer, Object[].class);
+            currentPlayerQuery.setParameter("currentPlayerId", userId);
+            Object[] currentPlayerStats = currentPlayerQuery.uniqueResult();
+
+            // Collect the results into LeaderboardRow objects
+            List<LeaderboardRow> leaderboard = new ArrayList<>();
+
+            // Add the current player's stats as the first entry
+            if (currentPlayerStats != null) {
+                String name = (String) currentPlayerStats[0];
+                int wins = ((Long) currentPlayerStats[1]).intValue();
+                int losses = ((Long) currentPlayerStats[2]).intValue();
+                leaderboard.add(new LeaderboardRow(name, wins, losses));
+            }
+
+            for (Object[] row : topPlayers) {
+                String name = (String) row[0];
+                int wins = ((Long) row[1]).intValue();
+                int losses = ((Long) row[2]).intValue();
+                leaderboard.add(new LeaderboardRow(name, wins, losses));
+
+                // Limit the leaderboard size to 17
+                if (leaderboard.size() >= 17) break;
+            }
+
+            transaction.commit();
+
+            return leaderboard.toArray(new LeaderboardRow[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /// Gets the list of available games that the player can join.
