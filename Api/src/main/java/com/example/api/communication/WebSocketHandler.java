@@ -1,12 +1,7 @@
 package com.example.api.communication;
 
-import com.example.api.business.services.PlayerService;
-import com.example.api.data.access.entities.Player;
 import com.example.api.data.access.repositories.PlayerRepository;
 import io.micrometer.common.lang.NonNullApi;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
@@ -17,6 +12,11 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @NonNullApi
 public class WebSocketHandler extends TextWebSocketHandler {
+    private final PlayerRepository playerRepository;
+
+    public WebSocketHandler(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession apiClientSession) throws Exception
@@ -54,7 +54,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         if (serverSession != null && serverSession.isOpen())
         {
             apiClientSession.getAttributes().put("serverSession", serverSession);
-            serverSession.sendMessage(new TextMessage("{\"command\":\"login\",\"data\":\"{\\\"playerId\\\":0,\\\"playerName\\\":\\\"" + apiClientSession.getPrincipal().getName() + "\\\"}\"}"));
+            serverSession.sendMessage(new TextMessage("{\"command\":\"login\",\"data\":\"{\\\"playerId\\\":" + playerRepository.findByUsername(apiClientSession.getPrincipal().getName()).get().getId() + ",\\\"playerName\\\":\\\"" + apiClientSession.getPrincipal().getName() + "\\\"}\"}"));
         }
         else
         {

@@ -206,6 +206,8 @@ public class Player
             synchronized (positionLock)
             {
                 position = new double[2];
+                position[0] = 0;
+                position[1] = 0;
             }
 
             gameSession.decrementActiveUpdatingThreads();

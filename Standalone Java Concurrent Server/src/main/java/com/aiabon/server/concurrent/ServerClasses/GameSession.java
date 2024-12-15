@@ -188,7 +188,7 @@ public class GameSession
         {
             return;
         }
-        if (players.size() < 2)
+        if (players.size() < 1)
         {
             return;
         }
@@ -345,13 +345,13 @@ public class GameSession
         GameSessionString.deleteCharAt(GameSessionString.length() - 1);
         GameSessionString.append("],");
 
-        GameSessionString.append("\"readyMap\":[");
+        GameSessionString.append("\"readyStatuses\":[");
         readyMap.forEach((playerId, ready) ->
                 GameSessionString.append("{\"playerId\":").append(playerId).append(",\"ready\":").append(ready).append("},"));
         GameSessionString.deleteCharAt(GameSessionString.length() - 1);
         GameSessionString.append("],");
 
-        GameSessionString.append("\"winner\":").append(winner == null ? "null" : winner.getUserId()).append(",");
+        GameSessionString.append("\"winnerId\":").append(winner == null ? "null" : winner.getUserId()).append(",");
 
         GameSessionString.append("\"gameState\":").append(gameStatus).append(",");
 
