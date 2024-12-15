@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b988239c-dd1b-4597-a904-a0432ec2c7a6" name="Changes" comment="More file/folder organization">
-      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f14f7bbc-13e7-4c5b-b8cf-9f374b502b89.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f14f7bbc-13e7-4c5b-b8cf-9f374b502b89.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/example/api/communication/WebSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/example/api/communication/WebSocketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/example/api/configuration/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/example/api/configuration/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/example/api/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/example/api/controllers/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/DTOs/PlayerDataLoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/DTOs/PlayerDataLoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/RecordsEnums/MaterialEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/RecordsEnums/MaterialEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Runnables/PlayerRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/GameSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/GameSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/ServerClasses/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Standalone Java Concurrent Server/src/main/java/com/aiabon/server/concurrent/Testing/LocalClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +58,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -64,7 +69,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/OctavianNistora/Strategy-Game.git&quot;,
-    &quot;accountId&quot;: &quot;fba343e5-b792-419f-81b3-7fdc37ecae8f&quot;
+    &quot;accountId&quot;: &quot;1f97e269-0ab1-4e7c-895c-0646f9905b0b&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -84,6 +89,7 @@
 }</component>
   <component name="ProjectId" id="2oRWeiaYXJyia9JbdQI2DDsCwIq" />
   <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -107,6 +113,8 @@
     "Maven.strategy-game-java-concurrent-server [clean].executor": "Run",
     "Maven.strategy-game-java-concurrent-server [compile].executor": "Run",
     "Maven.strategy-game-java-concurrent-server [validate].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Database detector": "Database detector",
+    "Notification.DoNotAsk-Database detector": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -122,7 +130,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Sularfy/IdeaProjects/Strategy-Game/Api/build.gradle",
+    "last_opened_file_path": "C:/Users/Sularfy/IdeaProjects/Strategy-Game",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -134,10 +142,15 @@
     "project.structure.side.proportion": "0.38505748",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.ApiApplication">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Compound.Start Servers">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.aiabon.server.concurrent.Main" />
       <module name="server-concurrent" />
       <extension name="coverage">
@@ -150,6 +163,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Start Servers" type="CompoundRunConfigurationType">
+      <toRun name="Main" type="Application" />
+      <toRun name="ApiApplication" type="SpringBootApplicationConfigurationType" />
+      <method v="2" />
+    </configuration>
     <configuration name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="Api.main" />
@@ -160,13 +178,9 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
+      <item itemvalue="Compound.Start Servers" />
       <item itemvalue="Spring Boot.ApiApplication" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -187,8 +201,15 @@
       <workItem from="1730832968051" duration="7848000" />
       <workItem from="1733054080303" duration="9849000" />
       <workItem from="1733125749448" duration="1345000" />
-      <workItem from="1733350032389" duration="705000" />
-      <workItem from="1733753233284" duration="1221000" />
+      <workItem from="1733593909680" duration="605000" />
+      <workItem from="1733613596915" duration="2045000" />
+      <workItem from="1733996907887" duration="513000" />
+      <workItem from="1733997755821" duration="1490000" />
+      <workItem from="1734015155704" duration="5115000" />
+      <workItem from="1734090170440" duration="3831000" />
+      <workItem from="1734184854924" duration="3446000" />
+      <workItem from="1734194126733" duration="1541000" />
+      <workItem from="1734249842951" duration="7581000" />
     </task>
     <task id="LOCAL-00001" summary="Added Maven support to concurrent server subproject">
       <option name="closed" value="true" />

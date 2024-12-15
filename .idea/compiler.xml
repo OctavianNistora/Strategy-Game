@@ -9,8 +9,5 @@
         <module name="server-concurrent" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="server-concurrent" target="23" />
-    </bytecodeTargetLevel>
   </component>
 </project>

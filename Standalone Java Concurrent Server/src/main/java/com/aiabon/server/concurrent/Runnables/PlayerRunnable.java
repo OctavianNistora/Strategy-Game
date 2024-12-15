@@ -5,7 +5,6 @@ import com.aiabon.server.concurrent.RecordsEnums.GamesListRow;
 import com.aiabon.server.concurrent.RecordsEnums.LeaderboardRow;
 import com.aiabon.server.concurrent.RecordsEnums.MaterialEnum;
 import com.aiabon.server.concurrent.ServerClasses.Player;
-import com.aiabon.server.concurrent.ServerClasses.SingletonServer;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import org.java_websocket.WebSocket;
@@ -19,7 +18,6 @@ public class PlayerRunnable implements Runnable
     private final LinkedBlockingQueue<String> input;
     private final WebSocket output;
     private Player player;
-    private int tempPlayerId;
 
     public PlayerRunnable(int id, LinkedBlockingQueue<String> input, WebSocket output)
     {
@@ -43,10 +41,9 @@ public class PlayerRunnable implements Runnable
                 {
                     PlayerCommandDTO playerCommandDTO = gson.fromJson(playerName, PlayerCommandDTO.class);
                     PlayerDataLoginDTO playerDataLoginDTO = gson.fromJson(playerCommandDTO.data(), PlayerDataLoginDTO.class);
-                    tempPlayerId = playerDataLoginDTO.id();
                     if (playerCommandDTO.command().equals("login"))
                     {
-                        player = new Player(this, playerDataLoginDTO.id(), playerDataLoginDTO.name());
+                        player = new Player(this, playerDataLoginDTO.playerId(), playerDataLoginDTO.playerName());
                         output.send("Successfully logged in");
                         input.clear();
                         break;
