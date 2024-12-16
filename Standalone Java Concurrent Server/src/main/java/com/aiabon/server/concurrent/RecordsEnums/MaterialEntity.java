@@ -16,7 +16,7 @@ public record MaterialEntity(int materialId, MaterialEnum materialType, double[]
         StringBuilder MaterialEntityString = new StringBuilder();
         MaterialEntityString.append("{");
         MaterialEntityString.append("\"id\":").append(materialId).append(",");
-        MaterialEntityString.append("\"type\":\"").append(materialType).append("\",");
+        MaterialEntityString.append("\"type\":\"").append(materialType.ordinal()).append("\",");
         MaterialEntityString.append("\"position\":[").append(position[0]).append(",").append(position[1]).append("]");
         MaterialEntityString.append("}");
         return MaterialEntityString.toString();

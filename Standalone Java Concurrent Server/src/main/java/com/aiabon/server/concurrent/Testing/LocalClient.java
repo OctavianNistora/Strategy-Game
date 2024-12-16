@@ -31,7 +31,7 @@ public class LocalClient
 
         try
         {
-            client = new LocalClientWebSocket(new URI("ws://localhost:8080/websocket"), ui.textArea);
+            client = new LocalClientWebSocket(new URI("ws://localhost:7676"), ui.textArea);
         } catch (URISyntaxException e)
         {
             System.out.println("URI error: " + e);
@@ -42,7 +42,7 @@ public class LocalClient
         ui.textArea.setText("Connected to server\n");
 
         ui.gson = new Gson();
-        ui.textField.addActionListener((al) ->
+        ui.textField.addActionListener((_) ->
         {
             String command = ui.textField.getText();
             String[] commandParts = command.split(" ");
@@ -387,5 +387,15 @@ public class LocalClient
         String commandJson = gson.toJson(playerCommandDTO);
 
         client.send(commandJson);
+    }
+
+    public JScrollPane getScrollPane()
+    {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane)
+    {
+        this.scrollPane = scrollPane;
     }
 }

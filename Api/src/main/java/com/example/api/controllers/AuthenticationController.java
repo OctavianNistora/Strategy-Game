@@ -40,11 +40,11 @@ public class AuthenticationController {
      * @return A ResponseEntity containing a {@link LoginResponseDTO} with the JWT token and expiration time.
      */
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> authenticate(@RequestBody LoginPlayerDTO loginUserDto) {
+    public ResponseEntity<Long> authenticate(@RequestBody LoginPlayerDTO loginUserDto) {
         Player authenticatedUser = authenticationService.authenticate(loginUserDto);
-        String jwtToken = jwtService.generateToken(authenticatedUser);
-        LoginResponseDTO loginResponse = new LoginResponseDTO(jwtToken, jwtService.getExpirationTime());
-        return ResponseEntity.ok(loginResponse);
+        //String jwtToken = jwtService.generateToken(authenticatedUser);
+        //LoginResponseDTO loginResponse = new LoginResponseDTO(jwtToken, jwtService.getExpirationTime());
+        return ResponseEntity.ok(authenticatedUser.getId());
     }
 
     /**
