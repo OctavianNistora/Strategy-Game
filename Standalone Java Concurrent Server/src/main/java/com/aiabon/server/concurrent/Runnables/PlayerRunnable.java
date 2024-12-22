@@ -187,7 +187,7 @@ public class PlayerRunnable implements Runnable
     {
         try
         {
-            System.out.println(System.currentTimeMillis() + " Thread " + id + ": Sending game state");
+            //System.out.println(System.currentTimeMillis() + " Thread " + id + ": Sending game state");
             output.send(gameState);
         } catch (Exception e)
         {
