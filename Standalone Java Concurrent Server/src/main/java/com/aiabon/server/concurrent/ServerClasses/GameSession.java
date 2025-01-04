@@ -233,7 +233,7 @@ public class GameSession
         gameStatus = 1;
         SingletonServer.getServer().removeGame(this.gameId);
 
-        saveGamePlayerMapping();
+        //saveGamePlayerMapping();
 
         Thread gameSessionSpawnerThread = new Thread(new GameSessionSpawnerRunnable(this));
         gameSessionSpawnerThread.start();

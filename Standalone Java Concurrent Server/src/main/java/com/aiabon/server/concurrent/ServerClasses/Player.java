@@ -535,7 +535,7 @@ public class Player
 
     public void sendGameState(String gameState)
     {
-        runnable.sendGameState(gameState, this.userId);
+        runnable.sendGameState(gameState);
     }
 
 
