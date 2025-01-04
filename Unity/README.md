@@ -1,0 +1,1 @@
+The Unity project can either be imported through copying the files and folders inside the Assets folder in the one inside your project, or importing it thrugh the unitypackage file, which should be less likely to cause any import-related problems

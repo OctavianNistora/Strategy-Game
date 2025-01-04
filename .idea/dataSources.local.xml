@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-243.21565.193">
+  <component name="dataSourceStorageLocal" created-in="IU-243.22562.145">
     <data-source name="strategy_game@localhost" uuid="f14f7bbc-13e7-4c5b-b8cf-9f374b502b89">
       <database-info product="MySQL" version="9.1.0-commercial" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="9.1.0" exact-driver-version="8.2">
         <extra-name-characters>#@</extra-name-characters>

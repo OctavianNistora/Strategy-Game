@@ -23,15 +23,15 @@ public class WebSocketHandler extends TextWebSocketHandler {
     {
         TextWebSocketHandler ApiToConcurrentServer = new TextWebSocketHandler() {
             @Override
-            public void afterConnectionEstablished(WebSocketSession session) throws Exception
+            public void afterConnectionEstablished(WebSocketSession session)
             {
-                System.out.println("Connection between api-client" + apiClientSession.getId() + " and api-server" + session.getId() + " established");
+                //System.out.println("Connection between api-client" + apiClientSession.getId() + " and api-server" + session.getId() + " established");
             }
 
             @Override
             protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception
             {
-                System.out.println("Received message from api-client" + message.getPayload());
+                //System.out.println("Received message from api-client" + message.getPayload());
                 apiClientSession.sendMessage(message);
             }
 
@@ -68,7 +68,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         WebSocketSession serverSession = (WebSocketSession) session.getAttributes().get("serverSession");
         if (serverSession != null)
         {
-            System.out.println("Received message from api-server" + message.getPayload());
+            //System.out.println("Received message from api-server" + message.getPayload());
             serverSession.sendMessage(message);
         }
     }
